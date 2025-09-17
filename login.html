@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | UniDesk</title>
+    <!-- Use Inter for modern, clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -20px; 
+            z-index: 0;
+            background: inherit;
+            background-image: inherit;
+            background-size: cover;
+            background-repeat: repeat;
+            filter: blur(15px) brightness(0.3);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #0d1b2a url('assets/images/Pattern(1).png') repeat;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        .container {
+            display: flex;
+            min-height: 80vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .left-panel {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 40px 0 0 60px;
+        }
+        .welcome-banner {
+    position: relative;
+    display: block;
+    margin: 48px auto 0 auto;
+    background: rgba(207, 68, 85, 0.85);
+    color: #fff;
+    padding: 20px 120px;
+    border-radius: 22px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-family: 'Raleway', Arial, sans-serif;
+    text-align: center;
+    left: unset;
+    top: unset;
+    width: fit-content;
+    max-width: 90vw;
+}
+@media (max-width: 900px) {
+    .welcome-banner {
+        margin: 24px auto 0 auto;
+        width: 90vw;
+        max-width: 500px;
+        font-size: 1.1rem;
+        padding: 14px 10vw;
+    }
+}
+@media (max-width: 600px) {
+    .welcome-banner {
+        width: 98vw;
+        max-width: 98vw;
+        padding: 10px 2vw;
+        font-size: 1rem;
+    }
+}
+        
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-box {
+            background: rgba(178, 58, 72, 0.95);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            padding: 20px 30px 30px 30px;
+            width: 400px;
+            max-width: 95vw;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        .login-box h2 {
+            margin: 0 0 8px 0;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .login-box p {
+            margin: 0 0 28px 0;
+            font-size: 1rem;
+            text-align: center;
+            color: #f8d7da;
+        }
+        .login-box label {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #fff;
+            color: #222;
+            outline: none;
+            box-sizing: border-box;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        .login-box .options-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .login-box .options-row label {
+            font-size: 0.98rem;
+            color: #fff;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .login-box .options-row a {
+            color: #ffe0e6;
+            font-size: 0.98rem;
+            text-decoration: none;
+            transition: text-decoration 0.2s;
+        }
+        .login-box .options-row a:hover {
+            text-decoration: underline;
+        }
+        .login-box button {
+            width: 100%;
+            background: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+            font-family: 'Raleway', Arial, sans-serif;
+        }
+        .login-box button:hover {
+            background: #b23a48;
+        }
+        .login-box .signup-link {
+            text-align: center;
+            font-size: 0.98rem;
+            color: #fff;
+        }
+        .login-box .signup-link a {
+            color: #ffe0e6;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        .login-box .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .logo {
+            background: none;
+            color: #fff;
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            font-family: 'Inter', Arial, sans-serif;
+            position: static;
+        }
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: none;
+            margin-right: 0;
+            border-radius: 8px;
+            padding: 0;
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .left-panel {
+                align-items: center;
+                padding: 30px 0 0 0;
+            }
+            .right-panel {
+                width: 100%;
+                justify-content: center;
+                margin-top: 30px;
+            }
+            .logo {
+                position: static;
+                margin: 0 auto 20px auto;
+            }
+        }
+        @media (max-width: 600px) {
+            .login-box {
+                padding: 22px 8vw 18px 8vw;
+                width: 98vw;
+            }
+        }
+        .main-image {
+            position: absolute;
+            top: 150px;
+            left: 170px;
+            width: 600px;
+            height: 600px;
+            max-width: 95vw;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            z-index: 5;
+        }
+        @media (max-width: 1200px) {
+            .main-image {
+               width: 320px;
+               height: 320px;
+               top: 120px;
+               left: 20px;
+            }
+        }
+        @media (max-width: 900px) {
+            .main-image {
+               position: static;
+               display: block;
+               margin: 30px auto 0 auto;
+               width: 90vw;
+               height: auto;
+            }
+        }
+        /* Add these or update your existing media queries for better responsiveness */
+@media (max-width: 1200px) {
+    .main-image {
+        width: 320px;
+        height: 320px;
+        top: 120px;
+        left: 20px;
+    }
+    .welcome-banner {
+        left: 40px;
+        padding: 16px 40px;
+        font-size: 1.2rem;
+    }
+    .logo {
+        top: 40px;
+        right: 40px;
+        padding: 8px 18px 8px 12px;
+    }
+}
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: unset;
+    }
+    .main-image {
+        position: static;
+        display: block;
+        margin: 30px auto 0 auto;
+        width: 80vw;
+        height: auto;
+        max-width: 400px;
+    }
+    .welcome-banner {
+        position: static;
+        margin: 24px auto 0 auto;
+        display: block;
+        left: unset;
+        top: unset;
+        width: 90vw;
+        max-width: 500px;
+        text-align: center;
+        font-size: 1.1rem;
+        padding: 14px 10vw;
+    }
+    .logo {
+        position: static;
+        margin: 20px auto 0 auto;
+        right: unset;
+        top: unset;
+        display: flex;
+        justify-content: center;
+    }
+    .login-box {
+        margin: 30px auto;
+        width: 90vw;
+        max-width: 400px;
+        padding: 24px 5vw 24px 5vw;
+    }
+}
+@media (max-width: 600px) {
+    .main-image {
+        width: 95vw;
+        max-width: 95vw;
+        margin: 20px auto 0 auto;
+    }
+    .welcome-banner {
+        width: 98vw;
+        max-width: 98vw;
+        padding: 10px 2vw;
+        font-size: 1rem;
+    }
+    .login-box {
+        padding: 18px 2vw 18px 2vw;
+        width: 98vw;
+        max-width: 98vw;
+    }
+    .logo {
+        padding: 6px 10px 6px 10px;
+        font-size: 1rem;
+    }
+    .logo-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 6px;
+    }
+}
+        
+    </style>
+</head>
+<body>
+   
+    <div class="welcome-banner">Welcome Back To UniDesk!</div>
+    
+    <div class="container">
+        <div class="left-panel">
+            <img class="main-image" src="assets/images/animated.gif" alt="Login Animation" > 
+        </div>
+        <div class="right-panel">
+            <div class="logo">
+    <img src="assets/images/Logo.png" alt="UniDesk Logo" class="logo-icon" >
+    </div>
+            <div class="login-box">
+                <h2>Login</h2>
+                <p>Good to see you here again!</p>
+                <form action="/login" method="post" autocomplete="off">
+                    <label for="roll">Enter your roll number</label>
+                    <input type="text" id="roll" name="roll" required autocomplete="username">
+                    <label for="password">Enter your password</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                    <div class="options-row">
+                        <label><input type="checkbox" name="stay_signed_in"> Stay signed in</label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="signup-link">
+                    Don't have an account?
+                    <a href="#">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
