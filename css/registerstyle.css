@@ -5,7 +5,7 @@ html, body {
 body::before {
     content: "";
     position: fixed;
-    inset: -20px; 
+    inset: -20px;
     z-index: 0;
     background: inherit;
     background-image: inherit;
@@ -66,7 +66,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-.login-box {
+.register-box {
     background: rgba(178, 58, 72, 0.95);
     border-radius: 22px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
@@ -79,25 +79,21 @@ body {
     align-items: stretch;
     font-family: 'Inter', Arial, sans-serif;
 }
-.login-box h2 {
-    margin: 0 0 8px 0;
+.register-box h2 {
+    margin: 0 0 18px 0;
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
 }
-.login-box p {
-    margin: 0 0 28px 0;
-    font-size: 1rem;
-    text-align: center;
-    color: #f8d7da;
-}
-.login-box label {
+.register-box label {
     font-size: 1rem;
     margin-bottom: 6px;
     font-weight: 500;
 }
-.login-box input[type="text"],
-.login-box input[type="password"] {
+.register-box input[type="email"],
+.register-box input[type="text"],
+.register-box input[type="number"],
+.register-box input[type="password"] {
     width: 100%;
     padding: 10px 12px;
     margin-bottom: 18px;
@@ -110,30 +106,7 @@ body {
     box-sizing: border-box;
     font-family: 'Inter', Arial, sans-serif;
 }
-.login-box .options-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 18px;
-}
-.login-box .options-row label {
-    font-size: 0.98rem;
-    color: #fff;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.login-box .options-row a {
-    color: #ffe0e6;
-    font-size: 0.98rem;
-    text-decoration: none;
-    transition: text-decoration 0.2s;
-}
-.login-box .options-row a:hover {
-    text-decoration: underline;
-}
-.login-box button {
+.register-box button {
     width: 100%;
     background: #e63946;
     color: #fff;
@@ -147,21 +120,21 @@ body {
     transition: background 0.2s;
     font-family: 'Raleway', Arial, sans-serif;
 }
-.login-box button:hover {
+.register-box button:hover {
     background: #b23a48;
 }
-.login-box .signup-link {
+.register-box .login-link {
     text-align: center;
     font-size: 0.98rem;
     color: #fff;
 }
-.login-box .signup-link a {
+.register-box .login-link a {
     color: #ffe0e6;
     text-decoration: none;
     font-weight: 600;
     margin-left: 4px;
 }
-.login-box .signup-link a:hover {
+.register-box .login-link a:hover {
     text-decoration: underline;
 }
 .logo {
@@ -191,8 +164,8 @@ body {
     position: absolute;
     top: 150px;
     left: 170px;
-    width: 600px;
-    height: 600px;
+    width: 650px;
+    height: 650px;
     object-fit: cover;
     border-radius: 22px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.10);
@@ -244,7 +217,7 @@ body {
     .logo {
         margin: 0 auto 20px auto;
     }
-    .login-box {
+    .register-box {
         margin: 30px auto;
         width: 90vw;
         max-width: 400px;
@@ -265,7 +238,7 @@ body {
         padding: 10px 2vw;
         font-size: 1rem;
     }
-    .login-box {
+    .register-box {
         padding: 18px 2vw 18px 2vw;
         width: 98vw;
         max-width: 98vw;

@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password-reset|UniDesk</title>
+    <rel link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/forget.css">
+    <link rel="background" href="assets/images/Pattern(1).png">
+ </head>
+ <body>
+    <div class="forgot-password"> 
+        <div class="logo">
+            <img src="assets/images/Logo.png" alt="UniDesk Logo" class="logo-icon" >
+        </div>
+        <img class="main-image" src="assets/images/key.svg" alt="Forgot Password svg" >
+        <h2>Forgot Password</h2>
+        <p>Please enter your email address to reset your password.</p>
+        <form action="/forgot-password" method="post" autocomplete="off">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="Enter your email ">
+            <button type="submit">Reset Password</button>
+            <p class="back-to-login">Remember your password? Back to <a href="login.html">Login</a></p>
+        </form>
+    </div>
+ </body>
+ </html>
