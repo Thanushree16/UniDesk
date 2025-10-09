@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniDesk | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="logo">
+      <img src="assets/images/Logo.png" alt="UniDesk Logo">
+      <span>UniDesk</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">About Us</a>
+      <a href="#who">Who it's for</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <div class="nav-buttons">
+      <a href="login.html" class="btn login">Login</a>
+      <a href="register.html" class="btn register">Register Now</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Studying has become <span>simpler.</span></h1>
+  </section>
+
+  <section class="main-card-section" id="about">
+    <div class="main-card">
+      <div class="card-content">
+        <div class="card-left">
+          <h2>About UniDesk</h2>
+          <p>UniDesk is a smart study hub that lets students seamlessly organize notes, PDFs, and presentations, streamline exam prep, and stay on track with structured tools for efficient learning</p>
+          <div class="features-list">
+            <div class="feature-item">
+              <span class="feature-icon">🤖</span>
+              <span>Study smarter, all in one place</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">📚</span>
+              <span>Interactive Digital Library</span>
+            </div>
+    
+            <div class="feature-item">
+              <span class="feature-icon">📈</span>
+              <span>AI-Powered Study Assistant</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="robot-container">
+            <img src="assets/images/Robot.png" alt="UniDesk Robot" class="robot-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="unified-desk-section" id="who">
+    <h2>A Unified Desk for everyone</h2>
+    <p>Whether you're a student, teacher, or working, UniDesk provides the tools you need to succeed.</p>
+    
+    <div class="categories-grid">
+      <div class="category-card">
+        <div class="category-icon">👨‍🎓</div>
+        <h3>For Students</h3>
+        <p>Access comprehensive study materials, AI-powered learning assistance, and collaborative tools designed to enhance your academic journey.</p>
+      </div>
+      
+      <div class="category-card">
+        <div class="category-icon">👨‍🏫</div>
+        <h3>For Educators</h3>
+        <p>Create engaging content, track student progress, and utilize advanced teaching tools to deliver exceptional educational experiences.</p>
+      </div>
+      
+      <div class="category-card">
+        <div class="category-icon">💼</div>
+        <h3>For Professionals</h3>
+        <p>Enhance your skills with professional development resources, industry insights, and continuous learning opportunities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="future-learning-section" id="how">
+    <h2>How UniDesk Works</h2>
+    
+    <div class="how-it-works-content">
+      <p class="how-description">
+        UniDesk is a comprehensive platform designed for university students to organize, share, and study their academic materials efficiently. Our AI-powered system helps you maximize your learning potential.
+      </p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <h3>Upload & Organize</h3>
+          <p>Students can easily upload PDFs, notes, PPTs, and other study materials for their semester subjects. Materials are organized by branches and semesters for easy access.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-Powered Assistant</h3>
+          <p>Our intelligent AI assistant provides instant summaries of your uploaded materials, generates practice questions for exams, and offers personalized study recommendations.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🏛️</div>
+          <h3>University Structure</h3>
+          <p>Content is systematically organized by university branches and semesters, making it easy to find relevant materials for your specific course and academic level.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3>Exam Preparation</h3>
+          <p>Generate custom quizzes, get important topic summaries, and receive AI-generated questions based on your uploaded study materials to ace your exams.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Smart Search</h3>
+          <p>Quickly find specific topics, concepts, or information across all your uploaded materials using our intelligent search functionality.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Progress Tracking</h3>
+          <p>Monitor your study progress, track completed topics, and get insights into your learning patterns to optimize your study schedule.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      
+      <p>&copy; 2024 UniDesk. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      const scrollPosition = window.scrollY;
+      
+      if (scrollPosition > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const robotImage = document.querySelector('.robot-image');
+      if (robotImage) {
+        robotImage.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.05) rotate(2deg)';
+        });
+        
+        robotImage.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1) rotate(0deg)';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
