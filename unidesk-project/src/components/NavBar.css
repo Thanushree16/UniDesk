@@ -1,0 +1,157 @@
+
+:root {
+  --page-bg-color: rgba(2, 14, 26, 0.95); /* navbar/background color */
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: background 0.3s ease, border-color 0.3s ease, padding 0.3s ease, transform 0.3s ease;
+  --navbar-bg: var(--page-bg-color);
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-bg);
+  box-sizing: border-box;
+}
+
+
+
+.navbar.section-about {
+  background: rgba(30, 58, 138, 0.95);
+}
+
+.navbar.section-who {
+  background: rgba(59, 130, 246, 0.95);
+}
+
+.navbar.section-how {
+  background: rgba(0, 17, 34, 0.95);
+}
+
+.navbar .logo {
+  flex: 0 0 auto;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logo {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.navbar .nav-links {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  margin-right: 3rem;
+  margin-left: auto;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .nav-links {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 1.5rem;
+}
+
+.logo img {
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+}
+
+.logo span {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #a0a9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #4a90e2;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #4a90e2;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .nav-buttons {
+  margin-left: auto;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.login {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn.login:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn.register {
+  background: linear-gradient(135deg, #4a90e2, #7b2ff7);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(74, 144, 226, 0.3);
+}
+
+.btn.register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(74, 144, 226, 0.4);
+}

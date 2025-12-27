@@ -1,0 +1,82 @@
+/* wrapper to center card */
+.forgot-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* card */
+.forgot-password {
+  background: rgba(13, 27, 42, 0.95);
+  border-radius: 22px;
+  padding: 40px 36px;
+  width: 400px;
+  max-width: 95vw;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+/* logo */
+.logo {
+  margin-bottom: 16px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* text */
+h2 {
+  margin-bottom: 10px;
+  font-size: 1.9rem;
+}
+
+p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+  margin-top: 10px;
+}
+
+/* form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #b23a48;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e63946;
+}
+
+label{
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+a{
+    color: #ecb1b1;
+    text-decoration: underline;
+}

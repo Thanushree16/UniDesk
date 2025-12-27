@@ -1,0 +1,134 @@
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-panel {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 40px 0 0 60px;
+}
+
+.welcome-banner {
+    position: relative;
+    display: block;
+    margin: 48px auto 0 auto;
+    background: rgba(207, 68, 85, 0.85);
+    color: #fff;
+    padding: 20px 120px;
+    border-radius: 22px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    text-align: center;
+    width: fit-content;
+    max-width: 90vw;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+
+}
+
+.login-box {
+    background: rgba(178, 58, 72, 0.95);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 30px 40px 40px;
+    width: 400px;
+    max-width: 95vw;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box h2 {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.login-box p {
+    margin-bottom: 28px;
+    text-align: center;
+    color: #f8d7da;
+    
+}
+
+.login-box label {
+    margin-bottom: 6px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: none;
+}
+
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.options-row label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    
+}
+
+.options-row input[type="checkbox"] {
+  margin: 0;
+}
+
+.login-box button {
+    background: #e63946;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.login-box button:hover {
+    background: #b23a48;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.logo {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.main-image {
+    position: absolute;
+    top: 150px;
+    left: 170px;
+    width: 600px;
+    height: 600px;
+    object-fit:cover;
+    border-radius: 22px;
+    z-index: 5;
+}
