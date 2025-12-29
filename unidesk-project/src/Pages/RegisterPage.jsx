@@ -1,12 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import "./RegisterPage.css";
 import "../styles/auth.css";
 
 export function RegisterPage() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Register | UniDesk";
   }, []);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    // later you will add API validation here
+    navigate("/dashboard");
+  };
 
   return (
     <div className="auth-page">
@@ -35,7 +44,7 @@ export function RegisterPage() {
           <div className="register-box">
             <h2>Register</h2>
 
-            <form autoComplete="off">
+            <form autoComplete="off" onSubmit={handleLogin}>
               <label>Email Address</label>
               <input type="email" required />
 

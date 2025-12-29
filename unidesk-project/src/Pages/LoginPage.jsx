@@ -1,12 +1,21 @@
 import "./LoginPage.css";
 import "../styles/auth.css";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function LoginPage() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Login | UniDesk";
   }, []);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    // later you will add API validation here
+    navigate("/dashboard");
+  };
 
   return (
     <div className="auth-page">
@@ -32,7 +41,7 @@ export function LoginPage() {
             <h2>Login</h2>
             <p>Good to see you here again!</p>
 
-            <form autoComplete="off">
+            <form autoComplete="off" onSubmit={handleLogin}>
               <label htmlFor="roll">Enter your roll number</label>
               <input type="text" id="roll" required />
 
@@ -43,7 +52,9 @@ export function LoginPage() {
                 <label>
                   <input type="checkbox" /> Stay signed in
                 </label>
-                <Link to="/forgot"><u>Forgot password?</u></Link>
+                <Link to="/forgot">
+                  <u>Forgot password?</u>
+                </Link>
               </div>
 
               <button type="submit">Login</button>
@@ -51,7 +62,9 @@ export function LoginPage() {
 
             <div className="signup-link">
               Don&apos;t have an account?
-              <Link to="/register"><u> Sign up</u></Link>
+              <Link to="/register">
+                <u>Sign up</u>
+              </Link>
             </div>
           </div>
         </div>
