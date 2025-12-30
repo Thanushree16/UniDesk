@@ -92,6 +92,24 @@
   z-index: 2;
 }
 
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+
+.filter-bar select {
+  background: #0b1e3d;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+
 /* ===== Responsive ===== */
 
 @media (max-width: 900px) {

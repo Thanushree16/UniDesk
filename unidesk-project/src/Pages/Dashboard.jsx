@@ -45,8 +45,8 @@ export function Dashboard() {
           <div className="recent-file">
             <h4>Your recently accessed file</h4>
             <div className="file-card">
-              <span>NLP Unit-1.pdf</span>
-              <button>Open File</button>
+              <span>NLP Unit-1.pdf  </span> <br />
+              <button> Open File</button>
             </div>
           </div>
 
