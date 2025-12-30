@@ -1,0 +1,105 @@
+/* ===== Page Layout ===== */
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #050b18, #031b3f);
+  color: #ffffff;
+}
+
+/* ===== Main Area ===== */
+
+.main {
+  flex: 1;
+  padding: 25px 40px;
+}
+
+/* ===== Section Title ===== */
+
+.subject-title {
+  margin: 24px 0 16px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 10px;
+}
+
+/* ===== Subjects Grid ===== */
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 28px;
+  margin-top: 25px;
+}
+
+/* ===== Subject Card ===== */
+
+.subject-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  color: #000;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+/* File count */
+
+.file-count {
+  font-size: 0.8rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* Subject code */
+
+.subject-code {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 40px;   /* pushes it above the strip */
+  position: relative;
+  z-index: 2;            /* stays above strip */
+}
+
+/* Yellow strip */
+
+.subject-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 28%;
+  background: #f7e58d;
+  border-radius: 0 0 16px 16px;
+  z-index: 1;            /* stays behind text */
+}
+
+
+/* Subject description */
+
+.subject-card p {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #333;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .main {
+    padding: 20px;
+  }
+
+  .subjects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}

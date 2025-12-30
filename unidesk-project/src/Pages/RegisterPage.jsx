@@ -1,4 +1,4 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import "./RegisterPage.css";
 import "../styles/auth.css";
@@ -12,16 +12,12 @@ export function RegisterPage() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // later you will add API validation here
     navigate("/dashboard");
   };
 
   return (
     <div className="auth-page">
-      <div className="welcome-banner">
-        Step Into Smart Studying with UniDesk.
-      </div>
+      <div className="top-banner">Step Into Smarter Studying with UniDesk.</div>
 
       <div className="container">
         <div className="left-panel">
@@ -33,12 +29,13 @@ export function RegisterPage() {
         </div>
 
         <div className="right-panel">
-          <div className="logo">
+          <div className="center-logo">
             <img
               src="/assets/images/Logo.png"
               alt="UniDesk Logo"
-              className="logo-icon"
+              className="center-logo-icon"
             />
+            <span>UniDesk</span>
           </div>
 
           <div className="register-box">
@@ -62,7 +59,9 @@ export function RegisterPage() {
 
             <div className="login-link">
               Already have an account?
-              <Link to="/login"><u> Login</u></Link>
+              <Link to="/login">
+                <u> Login</u>
+              </Link>
             </div>
           </div>
         </div>

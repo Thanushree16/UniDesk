@@ -1,94 +1,74 @@
-/* ===== Left Panel ===== */
-.container {
+/* ===== LAYOUT ===== */
+.dashboard-layout {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(180deg, #050b18 0%, #031b3f 100%);
-}
-
-.left-panel {
-  width: 260px;
-  height: 100vh;
-  background: linear-gradient(180deg, #0a1630 0%, #060d1f 100%);
+  background: linear-gradient(180deg, #050b18, #031b3f);
   color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 18px;
-  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.4);
+  font-family: "Inter", sans-serif;
 }
 
-/* ===== Logo Section ===== */
-.left-panel .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
+/* ===== MAIN ===== */
+.main {
+  flex: 1;
+  padding: 25px;
 }
 
-.logo-icon {
-  width: 34px;
-  height: 34px;
+
+/* Greeting */
+.greeting {
+  margin: 25px 0 10px;
 }
 
-.left-panel .logo span {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+/* Timetable */
+.timetable {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 20px;
+  border-radius: 15px;
 }
 
-/* ===== Menu Icon (Hamburger) ===== */
-.dashboard-menu-icon {
-  margin-bottom: 25px;
-}
-
-.menu-icon {
-  width: 26px;
-  cursor: pointer;
-  opacity: 0.9;
-}
-
-/* ===== Menu Container ===== */
-.dashbord-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* ===== Menu Items (Common) ===== */
-.dashboard-menu-item,
-.resourceLibrary-menu-item,
-.aiAssistant-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 14px;
+.date-strip {
+  background: #6b2430;
+  padding: 12px;
   border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
-/* Icons inside menu */
-.dashboard-icon,
-.resource-library-icon,
-.ai-icon {
-  width: 20px;
-  height: 20px;
+.class-cards {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
 }
 
-/* ===== Active Menu (Dashboard) ===== */
-.dashboard-menu-item {
-  background: linear-gradient(90deg, #b33a3a, #8b2c2c);
+.class-card {
+  flex: 1;
+  border: 1px solid #b33a3a;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
 }
 
-/* ===== Hover Effect ===== */
-.resourceLibrary-menu-item:hover,
-.aiAssistant-menu-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+.view-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #0a2c7a;
+  border: none;
+  border-radius: 10px;
+  color: white;
 }
 
-/* ===== Text ===== */
-.dashboard-menu-item span,
-.resourceLibrary-menu-item span,
-.aiAssistant-menu-item span {
-  font-weight: 500;
+/* Bottom grid */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.file-card,
+.exam-panel {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
 }

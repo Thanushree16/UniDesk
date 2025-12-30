@@ -4,8 +4,14 @@ import { ForgotPage } from "./Pages/ForgotPage";
 import { RegisterPage } from "./Pages/RegisterPage";
 import { Home } from "./Pages/Home";
 import { Dashboard } from "./Pages/Dashboard";
+import { ResourcePage } from "./Pages/ResourcePage";
+import { AiPage } from "./Pages/Aipage";
+import { UploadPage } from "./Pages/UploadPage";
+
 
 import "./App.css";
+
+
 
 
 function App() {
@@ -16,6 +22,11 @@ function App() {
       <Route path="/forgot" element={<ForgotPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/resources" element={<ResourcePage />} />
+      <Route path="/assistant" element={<AiPage />} />
+      <Route path="/upload" element={<UploadPage />} />
+
+
 
 
     </Routes>

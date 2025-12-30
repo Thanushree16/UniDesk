@@ -1,0 +1,125 @@
+/* ===== Main Layout ===== */
+
+.ai-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #050b18, #031b3f);
+  color: #fff;
+  padding: 0;
+}
+
+/* ===== Header ===== */
+
+.ai-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ai-header h3 {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.back-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.ai-header-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bell-dot {
+  width: 10px;
+  height: 10px;
+  background: #e63946;
+  border-radius: 50%;
+}
+
+.profile-circle {
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* ===== Chat Area ===== */
+
+.ai-chat {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Chat bubbles */
+
+.chat-bubble {
+  max-width: 70%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.chat-bubble.user {
+  background: #8b2c2c;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.chat-bubble.ai {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #b33a3a;
+}
+
+.ai-name {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.chat-bubble ul {
+  margin-top: 8px;
+  padding-left: 18px;
+}
+
+.chat-bubble li {
+  margin-bottom: 6px;
+}
+
+/* ===== Input Area ===== */
+
+.ai-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ai-input input {
+  flex: 1;
+  padding: 12px 14px;
+  background: #0b1e3d;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  outline: none;
+}
+
+.plus {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.send-icon {
+  font-size: 20px;
+  cursor: pointer;
+}

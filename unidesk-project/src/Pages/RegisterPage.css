@@ -1,228 +1,212 @@
+/* ===== Page Container ===== */
 
-.container {
+.auth-page {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== Top Left Banner ===== */
+
+.top-banner {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    background: rgba(178, 58, 72, 0.95);
+    color: #fff;
+    padding: 18px 42px;
+    border-radius: 20px;
+    font-size: 1.45rem;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    z-index: 5;
+}
+
+/* ===== Centered Logo Above Form ===== */
+
+.center-logo {
     display: flex;
-    min-height: 80vh;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
+
+.center-logo-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* ===== Main Layout ===== */
+
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    gap: 60px;
+}
+
+/* ===== Left Panel ===== */
+
 .left-panel {
     flex: 1.2;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 40px 0 0 60px;
+    align-items: center;
+    justify-content: center;
+}
 
+/* ===== Illustration ===== */
+
+.main-image {
+    width: 520px;
+    height: 520px;
+    object-fit: contain;
+    border-radius: 22px;
 }
-.welcome-banner {
-    position: relative;
-    display: block;
-    margin: 48px auto 0 auto;
-    background: rgba(207, 68, 85, 0.85);
-    color: #fff;
-    padding: 20px 120px;
-    border-radius: 20px;
-    font-size: 1.7rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    font-family: 'Raleway', Arial, sans-serif;
-    text-align: center;
-    width: fit-content;
-    max-width: 90vw;
-}
+
+/* ===== Right Panel ===== */
+
 .right-panel {
-    flex: 1;
+    flex: 0.9;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+    justify-content: center;   /* vertical centering */
+    transform: translateY(-20px); /* ⬆ subtle upward shift */
 }
+
+/* ===== Logo (inside panel – unused now, kept safe) ===== */
+
+.logo {
+    display: none;
+}
+
+/* ===== Register Box ===== */
+
 .register-box {
     background: rgba(178, 58, 72, 0.95);
     border-radius: 22px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    padding: 30px 40px 40px 40px;
-    width: 400px;
-    max-width: 95vw;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    padding: 26px 32px 28px;
+    width: 380px;
     color: #fff;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    font-family: 'Inter', Arial, sans-serif;
 }
+
+/* ===== Heading ===== */
+
 .register-box h2 {
-    margin: 0 0 18px 0;
-    font-size: 2rem;
-    font-weight: 700;
+    margin-bottom: 16px;
+    font-size: 1.8rem;
     text-align: center;
 }
+
+/* ===== Form ===== */
+
 .register-box label {
-    font-size: 1rem;
-    margin-bottom: 6px;
-    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
 }
-.register-box input[type="email"],
-.register-box input[type="text"],
-.register-box input[type="number"],
-.register-box input[type="password"] {
-    width: 100%;
+
+.register-box input {
     padding: 10px 12px;
-    margin-bottom: 18px;
-    border: none;
+    margin-bottom: 14px;
     border-radius: 8px;
-    font-size: 1rem;
-    background: #fff;
-    color: #222;
+    border: none;
+    font-size: 0.95rem;
     outline: none;
-    box-sizing: border-box;
-    font-family: 'Inter', Arial, sans-serif;
 }
+
+/* ===== Button ===== */
+
 .register-box button {
-    width: 100%;
+    margin-top: 6px;
+    padding: 12px 0;
+    font-size: 1rem;
+    border-radius: 10px;
     background: #e63946;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 12px 0;
-    font-size: 1.1rem;
-    font-weight: 600;
     cursor: pointer;
-    margin-bottom: 12px;
-    transition: background 0.2s;
-    font-family: 'Raleway', Arial, sans-serif;
 }
+
 .register-box button:hover {
     background: #b23a48;
 }
-.register-box .login-link {
+
+/* ===== Login Link ===== */
+
+.login-link {
+    margin-top: 8px;
+    font-size: 0.9rem;
     text-align: center;
-    font-size: 0.98rem;
-    color: #fff;
 }
-.register-box .login-link a {
-    color: #ffe0e6;
-    text-decoration: none;
-    font-weight: 600;
-    margin-left: 4px;
+
+/* ===== Responsive Fixes ===== */
+
+/* Tablets & smaller laptops */
+@media (max-width: 1100px) {
+    .main-image {
+        width: 420px;
+        height: 420px;
+    }
+
+    .container {
+        padding: 0 40px;
+    }
 }
-.register-box .login-link a:hover {
-    text-decoration: underline;
-}
-.logo {
-    background: none;
-    color: #fff;
-    border-radius: 12px;
-    padding: 0;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: none;
-    font-family: 'Inter', Arial, sans-serif;
-    position: static;
-}
-.logo-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    background: none;
-    border-radius: 8px;
-    padding: 0;
-    display: block;
-    margin: 0 auto;
-}
-.main-image {
-    position: absolute;
-    top: 150px;
-    left: 170px;
-    width: 650px;
-    height: 650px;
-    object-fit: cover;
-    border-radius: 22px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    z-index: 5;
-    max-width: 95vw;
-    max-height: 95vh;
-}
-@media (max-width: 1200px) {
+
+/* Tablets */
+@media (max-width: 900px) {
+    .top-banner,
+    .top-logo {
+        display: none;
+    }
+
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .left-panel {
+        justify-content: center;
+        padding-left: 0;
+    }
+
     .main-image {
         width: 320px;
         height: 320px;
-        top: 120px;
-        left: 20px;
-        max-width: 90vw;
-        max-height: 60vw;
     }
-    .welcome-banner {
-        padding: 16px 40px;
-        font-size: 1.2rem;
+
+    .right-panel {
+        transform: none;
     }
-}
-@media (max-width: 900px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: unset;
-    }
-    .main-image {
-        position: static;
-        display: block;
-        margin: 30px auto 0 auto;
-        width: 90vw;
-        height: auto;
-        max-width: 400px;
-        max-height: 60vw;
-    }
-    .left-panel {
-        align-items: center;
-        padding: 0;
-    }
-    .welcome-banner {
-        margin: 24px auto 0 auto;
-        width: 90vw;
-        max-width: 500px;
-        font-size: 1.1rem;
-        padding: 14px 10vw;
-    }
-    .logo {
-        margin: 0 auto 20px auto;
-    }
+
     .register-box {
-        margin: 30px auto;
         width: 90vw;
-        max-width: 400px;
-        padding: 24px 5vw 24px 5vw;
+        max-width: 380px;
     }
 }
+
+/* Mobile */
 @media (max-width: 600px) {
     .main-image {
-        width: 95vw;
-        max-width: 95vw;
-        margin: 20px auto 0 auto;
-        height: auto;
-        max-height: 60vw;
+        display: none; /* 🔥 KEY FIX */
     }
-    .welcome-banner {
-        width: 98vw;
-        max-width: 98vw;
-        padding: 10px 2vw;
-        font-size: 1rem;
-    }
+
     .register-box {
-        padding: 18px 2vw 18px 2vw;
-        width: 98vw;
-        max-width: 98vw;
-    }
-    .logo {
-        padding: 6px 10px 6px 10px;
-        font-size: 1rem;
-    }
-    .logo-icon {
-        width: 24px;
-        height: 24px;
+        width: 92vw;
+        padding: 22px 20px;
     }
 }

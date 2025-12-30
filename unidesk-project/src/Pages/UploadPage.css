@@ -1,0 +1,126 @@
+/* ===== Upload Page Main ===== */
+
+.upload-main {
+  flex: 1;
+  padding: 25px 40px;
+  background: linear-gradient(180deg, #050b18, #031b3f);
+  color: #ffffff;
+}
+
+/* ===== Titles ===== */
+
+.upload-title {
+  margin: 20px 0 14px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.uploaded-title {
+  margin: 26px 0 14px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== Upload Box ===== */
+
+.upload-box {
+  height: 180px;
+  border: 2px dashed #b33a3a;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #d1d5db;
+  gap: 10px;
+}
+
+.upload-icon {
+  font-size: 34px;
+  color: #e63946;
+}
+
+.upload-box span {
+  color: #e63946;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* ===== Uploaded Files Container ===== */
+
+.uploaded-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+/* ===== Uploaded File Card ===== */
+
+.uploaded-file {
+  background: linear-gradient(90deg, #ff7a18, #e94e1b);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.file-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.file-icon {
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.file-info h4 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.file-info p {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.edit-icon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ===== Footer Buttons ===== */
+
+.upload-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.next-btn {
+  background: #8b2c2c;
+  border: none;
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 10px;
+  cursor: pointer;
+}

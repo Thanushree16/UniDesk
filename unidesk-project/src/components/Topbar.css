@@ -1,0 +1,89 @@
+/* ===== Topbar ===== */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ===== Search Box ===== */
+
+.search-box {
+  position: relative;
+  width: 60%;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 14px 12px 42px; /* space for icon */
+  border-radius: 10px;
+  border: none;
+  background: #0b1e3d;
+  color: white;
+  outline: none;
+}
+
+/* Search icon inside input */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  pointer-events: none; /* allows clicking input */
+}
+
+
+/* ===== Topbar Icons ===== */
+
+.top-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Common icon style */
+.notification-bell,
+.profile-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 20px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.notification-bell:hover,
+.profile-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Notification dot */
+.notification-bell {
+  position: relative;
+}
+
+.notification-bell::after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 8px;
+  height: 8px;
+  background: #e63946;
+  border-radius: 50%;
+  border: 2px solid #050b18;
+}
+
+/* Profile icon size */
+.profile-icon {
+  font-size: 22px;
+}

@@ -1,0 +1,133 @@
+/* ===== Sidebar ===== */
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #0a1630 0%, #060d1f 100%);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* ===== Top Section ===== */
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 34px;
+  height: 34px;
+}
+
+.logo span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Hamburger */
+.hamburger {
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.collapsed-hamburger {
+  font-size: 28px;   /* 🔥 larger when collapsed */
+  margin: 0 auto;
+}
+
+/* ===== Menu ===== */
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14.5px;
+  transition: background 0.25s ease;
+}
+
+.menu-item svg {
+  font-size: 20px;
+}
+
+/* When collapsed: center & enlarge icons */
+.sidebar.collapsed .menu-item {
+  justify-content: center;
+}
+
+.sidebar.collapsed .menu-item svg {
+  font-size: 24px;   /* 🔥 larger icons */
+}
+
+/* Active */
+.menu-item.active {
+  background: linear-gradient(90deg, #b33a3a, #8b2c2c);
+}
+
+/* Hover */
+.menu-item:not(.active):hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== Upload Button ===== */
+
+.upload-btn {
+  margin-top: 28px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(180deg, #0b2f86, #08215f);
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ===== Logout ===== */
+
+.logout {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 24px;
+  font-size: 18px;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+/* Center logout icon when collapsed */
+.sidebar.collapsed .logout {
+  justify-content: center;
+}
+
+.sidebar.collapsed .logout svg {
+  font-size: 22px;
+}
