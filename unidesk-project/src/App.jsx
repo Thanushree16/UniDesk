@@ -7,6 +7,7 @@ import { Dashboard } from "./Pages/Dashboard";
 import { ResourcePage } from "./Pages/ResourcePage";
 import { AiPage } from "./Pages/Aipage";
 import { UploadPage } from "./Pages/UploadPage";
+import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
 
 
 import "./App.css";
@@ -23,8 +24,11 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/resources" element={<ResourcePage />} />
+      <Route path="/resources/:subjectId" element={<SubjectFilesPage />} />
+
       <Route path="/assistant" element={<AiPage />} />
       <Route path="/upload" element={<UploadPage />} />
+      
 
 
 

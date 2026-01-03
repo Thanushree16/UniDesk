@@ -1,4 +1,4 @@
-import { BiSolidBell, BiSearch } from "react-icons/bi";
+import { BiBell, BiSearch } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import "./Topbar.css";
 
@@ -11,7 +11,7 @@ export function Topbar() {
       </div>
       <div className="top-icons">
         <div className="notification-bell">
-          <BiSolidBell />
+          <BiBell />
         </div>
         <div className="profile-icon">
           <CgProfile />

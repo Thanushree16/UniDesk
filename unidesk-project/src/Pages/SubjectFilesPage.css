@@ -1,0 +1,129 @@
+/* ===== Page Layout ===== */
+
+.main {
+  flex: 1;
+  padding: 25px 40px;
+  background: linear-gradient(180deg, #050b18, #031b3f);
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ===== Subject Title ===== */
+
+.subject-title {
+  margin: 20px 0 18px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+}
+
+/* ===== Files List ===== */
+
+.files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+/* ===== File Card ===== */
+
+.file-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.file-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ===== File Info ===== */
+
+.file-info h4 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.file-info p {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* ===== Back Button ===== */
+.subject-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+
+.back-btn {
+  margin-top: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;              /* neutral grey */
+  font-size: 0.9rem;
+  padding: 6px 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.back-btn svg {
+  font-size: 18px;
+  color: #9ca3af;              /* same grey as text */
+}
+
+.back-btn:hover {
+  color: #d1d5db;              /* lighter grey on hover */
+  text-decoration: underline;
+}
+
+.back-btn:hover svg {
+  color: #d1d5db;
+}
+
+
+/* ===== Empty / Not Found State ===== */
+
+.no-files {
+  margin-top: 24px;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .main {
+    padding: 20px;
+  }
+
+  .subject-title {
+    font-size: 1.3rem;
+  }
+
+  .file-card {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .subject-title {
+    font-size: 1.2rem;
+  }
+
+  .file-info h4 {
+    font-size: 0.9rem;
+  }
+}

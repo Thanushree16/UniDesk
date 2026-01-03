@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
+import { useSubjects } from "../context/SubjectsContext";
 import "./ResourcePage.css";
 
 
 export function ResourcePage() {
-  {/*Year and semester array */}
+  const navigate = useNavigate();
+
+  //Year and semester array 
   const yearSemesterMap = {
     1: [1, 2],
     2: [3, 4],
@@ -13,62 +17,21 @@ export function ResourcePage() {
     4: [7, 8],
   };
 
-  {/*Year and semester selected*/}
+  //Year and semester selected
   const [selectedYear, setSelectedYear] = useState(4);
   const [selectedSemester, setSelectedSemester] = useState(
     yearSemesterMap[4][0]
   );
 
-  {/* Subject data - updated soon*/}
-  const [subjects, setSubjects] = useState([
-    {
-      subjectName: "Big Data Analytics",
-      subjectCode: "BDA",
-      id: crypto.randomUUID(),
-      year: 4,
-      semester: 7,
-      files: 4,
-    },
-    {
-      subjectName: "Internet Of Things",
-      subjectCode: "IOT",
-      id: crypto.randomUUID(),
-      year: 4,
-      semester: 7,
-      files: 4,
-    },
-    {
-      subjectName: "Natural Language Processing",
-      subjectCode: "NLP",
-      id: crypto.randomUUID(),
-      year: 4,
-      semester: 7,
-      files: 4,
-    },
-    {
-      subjectName: "Cloud Computing & Security",
-      subjectCode: "CC&S",
-      id: crypto.randomUUID(),
-      year: 4,
-      semester: 7,
-      files: 4,
-    },
-    {
-      subjectName: "Fundamentals Of Entrepreneurship",
-      subjectCode: "FE",
-      id: crypto.randomUUID(),
-      year: 4,
-      semester: 7,
-      files: 4,
-    },
-  ]);
+  // Subject data - updated soon
+  const { subjects } = useSubjects();
 
-  {/* Auto reset of the semester, when the year is changed*/}
+ // Auto reset of the semester, when the year is changed
   useEffect(() => {
     setSelectedSemester(yearSemesterMap[selectedYear][0]);
   }, [selectedYear]);
 
-  {/* Filtering the subjects according to the selected year and semester*/}
+ //Filtering the subjects according to the selected year and semester
   const filteredSubjects = subjects.filter(
     (subject) =>
       subject.year === selectedYear && 
@@ -115,8 +78,10 @@ export function ResourcePage() {
         <div className="subjects-grid">
           {filteredSubjects.map((subject) => (
             <div className="subject-wrapper" key={subject.id}>
-              <div className="subject-card">
-                <div className="file-count">{subject.files}Files</div>
+              <div className="subject-card" 
+               onClick={() => navigate(`/resources/${subject.id}`)}
+              >
+                <div className="file-count">{subject.files.length} Files</div>
                 <div className="subject-code">{subject.subjectCode}</div>
                 <div className="subject-strip"></div>
               </div>
