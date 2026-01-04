@@ -1,35 +1,21 @@
-/* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getSubjects, saveSubjects, addFile } from "../services/subjectServices";
 
 const SubjectsContext = createContext();
 
 export function SubjectsProvider({ children }) {
-  const [subjects, setSubjects] = useState([
-    {
-      id: "bda",
-      subjectName: "Big Data Analytics",
-      subjectCode: "BDA",
-      year: 4,
-      semester: 7,
-      files: [
-        { id: "f1", name: "Unit-1 Notes.pdf", type: "PDF", size: "2.1 MB" },
-        { id: "f2", name: "Unit-1 PPT.ppt", type: "PPT", size: "4.5 MB" },
-      ],
-    },
-    {
-      id: "iot",
-      subjectName: "Internet Of Things",
-      subjectCode: "IOT",
-      year: 4,
-      semester: 7,
-      files: [
-        { id: "f3", name: "IoT Basics.pdf", type: "PDF", size: "1.8 MB" },
-      ],
-    },
-  ]);
+  const [subjects, setSubjects] = useState(() => getSubjects());
+
+  useEffect(() => {
+    saveSubjects(subjects);
+  }, [subjects]);
+
+  function addFileToSubject(subjectId, file) {
+    setSubjects((prev) => addFile(prev, subjectId, file));
+  }
 
   return (
-    <SubjectsContext.Provider value={{ subjects, setSubjects }}>
+    <SubjectsContext.Provider value={{ subjects, addFileToSubject }}>
       {children}
     </SubjectsContext.Provider>
   );

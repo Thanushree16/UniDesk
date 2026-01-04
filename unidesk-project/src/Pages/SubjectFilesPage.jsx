@@ -30,7 +30,7 @@ export function SubjectFilesPage() {
       </div>
     );
   }
-  //<IoIosArrowBack />
+
   return (
     <div className="dashboard-layout">
       <LeftPanel />
@@ -49,16 +49,20 @@ export function SubjectFilesPage() {
         </h2>
 
         <div className="files-list">
-          {subject.files.map((file) => (
-            <div className="file-card" key={file.id}>
-              <div className="file-info">
-                <h4>{file.name}</h4>
-                <p>
-                  {file.type} • {file.size}
-                </p>
+          {subject.files.length === 0 ? (
+            <p className="no-files">No files uploaded yet.</p>
+          ) : (
+            subject.files.map((file) => (
+              <div className="file-card" key={file.id}>
+                <div className="file-info">
+                  <h4>{file.name}</h4>
+                  <p>
+                    {file.type} • {file.size}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </main>
     </div>
