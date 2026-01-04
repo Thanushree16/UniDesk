@@ -4,60 +4,74 @@
   background: linear-gradient(180deg, #001f4d 0%, #003d82 100%);
 }
 
+/* Heading */
 .unified-desk-section h2 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #fff;
+  color: #ffffff;
 }
 
-.unified-desk-section p {
-  font-size: 1.2rem;
-  margin-bottom: 4rem;
-  opacity: 0.8;
-  max-width: 600px;
+/* Description */
+.unified-desk-section > p {
+  font-size: 1.15rem;
+  margin-bottom: 3.5rem;
+  opacity: 0.85;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  color: #e5e7eb;
 }
 
+/* Grid — centered single card */
 .categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Card */
 .category-card {
-  background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(59, 130, 246, 0.2));
-  border-radius: 16px;
-  padding: 2rem;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 58, 138, 0.45),
+    rgba(59, 130, 246, 0.25)
+  );
+  border-radius: 18px;
+  padding: 2.4rem 2rem;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.25);
 }
 
+/* Hover */
 .category-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.35);
 }
 
+/* Icon */
 .category-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 3.2rem;
+  margin-bottom: 1.2rem;
 }
 
+/* Card heading */
 .category-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: #fff;
+  margin-bottom: 0.9rem;
+  color: #ffffff;
 }
 
+/* Card text */
 .category-card p {
   font-size: 0.95rem;
   line-height: 1.6;
-  opacity: 0.8;
+  opacity: 0.85;
   margin: 0;
+  color: #e5e7eb;
 }
