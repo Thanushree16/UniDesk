@@ -4,6 +4,8 @@ import cors from "cors";
 import subjectRoutes from "./routes/subjectRoutes.js";
 import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
+
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ connectDB();
 
 app.use("/api/subjects", subjectRoutes);
 app.use("/api/files", fileRoutes);
+app.use("/api/auth", authRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("UniDesk API running");

@@ -8,10 +8,9 @@ import { ResourcePage } from "./Pages/ResourcePage";
 import { AiPage } from "./Pages/Aipage";
 import { UploadPage } from "./Pages/UploadPage";
 import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
-
+import { ProtectedRoute } from "./components/protectedRoute";
 
 import "./App.css";
-
 
 function App() {
   return (
@@ -20,12 +19,35 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/forgot" element={<ForgotPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/resources" element={<ResourcePage />} />
       <Route path="/resources/:subjectId" element={<SubjectFilesPage />} />
       <Route path="/assistant" element={<AiPage />} />
-      <Route path="/upload" element={<UploadPage />} />
 
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/resources"
+        element={
+          <ProtectedRoute>
+            <ResourcePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/upload"
+        element={
+          <ProtectedRoute>
+            <UploadPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

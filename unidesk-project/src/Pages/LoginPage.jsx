@@ -1,20 +1,34 @@
 import "./LoginPage.css";
 import "../styles/auth.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 export function LoginPage() {
   const navigate = useNavigate();
+
+  const [rollNumber, setRollNumber] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     document.title = "Login | UniDesk";
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // later you will add API validation here
-    navigate("/dashboard");
+    try {
+      const { data } = await api.post("/auth/login", {
+        rollNumber,
+        password,
+      });
+
+      localStorage.setItem("token", data.token);
+
+      navigate("/resources");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
+    }
   };
 
   return (
@@ -43,10 +57,22 @@ export function LoginPage() {
 
             <form autoComplete="off" onSubmit={handleLogin}>
               <label htmlFor="roll">Enter your roll number</label>
-              <input type="text" id="roll" required />
+              <input
+                type="text"
+                id="roll"
+                required
+                value={rollNumber}
+                onChange={(e) => setRollNumber(e.target.value)}
+              />
 
               <label htmlFor="password">Enter your password</label>
-              <input type="password" id="password" required />
+              <input
+                type="password"
+                id="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
               <div className="options-row">
                 <label>
