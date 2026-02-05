@@ -13,8 +13,6 @@ import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
 import "./App.css";
 
 
-
-
 function App() {
   return (
     <Routes>
@@ -25,13 +23,8 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/resources" element={<ResourcePage />} />
       <Route path="/resources/:subjectId" element={<SubjectFilesPage />} />
-
       <Route path="/assistant" element={<AiPage />} />
       <Route path="/upload" element={<UploadPage />} />
-      
-
-
-
 
     </Routes>
   );

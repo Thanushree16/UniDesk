@@ -1,21 +1,41 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getSubjects, saveSubjects, addFile } from "../services/subjectServices";
+import axios from "axios";
 
 const SubjectsContext = createContext();
 
 export function SubjectsProvider({ children }) {
-  const [subjects, setSubjects] = useState(() => getSubjects());
+  const [subjects, setSubjects] = useState([]);
+
+  async function fetchSubjects() {
+    try {
+      const res = await axios.get("http://localhost:5000/api/subjects");
+
+      const formatted = res.data.map((s) => ({
+        ...s,
+        id: s._id, // frontend convenience
+      }));
+
+      setSubjects(formatted);
+    } catch (err) {
+      console.error("Failed to fetch subjects", err);
+    }
+  }
 
   useEffect(() => {
-    saveSubjects(subjects);
-  }, [subjects]);
+    fetchSubjects();
+  }, []);
 
-  function addFileToSubject(subjectId, file) {
-    setSubjects((prev) => addFile(prev, subjectId, file));
+  async function refreshSubjects() {
+    await fetchSubjects();
   }
 
   return (
-    <SubjectsContext.Provider value={{ subjects, addFileToSubject }}>
+    <SubjectsContext.Provider
+      value={{
+        subjects,
+        refreshSubjects,
+      }}
+    >
       {children}
     </SubjectsContext.Provider>
   );

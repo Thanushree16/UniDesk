@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
 import { useSubjects } from "../context/SubjectsContext";
@@ -22,30 +23,44 @@ export function UploadPage() {
     setSelectedFile(e.target.files[0]);
   }
 
-  function handleUpload() {
+  async function handleUpload() {
     if (!selectedFile || !selectedSubjectId) return;
 
-    const subject = subjects.find((s) => s.id === selectedSubjectId);
+    try {
+      const fileData = {
+        fileName: selectedFile.name,
+        fileType:
+          selectedFile.type.split("/")[1]?.toUpperCase() || "FILE",
+        fileSize: `${(selectedFile.size / 1024 / 1024).toFixed(1)} MB`,
+      };
 
-    const newFile = {
-      id: crypto.randomUUID(),
-      name: selectedFile.name,
-      type: selectedFile.type.split("/")[1]?.toUpperCase() || "FILE",
-      size: `${(selectedFile.size / 1024 / 1024).toFixed(1)} MB`,
-    };
+      // 🔗 Backend API call
+      const res = await axios.post(
+        `http://localhost:5000/api/subjects/${selectedSubjectId}/files`,
+        fileData
+      );
 
-    addFileToSubject(selectedSubjectId, newFile);
+      // Update global subject context
+      addFileToSubject(selectedSubjectId, res.data);
 
-    setRecentFiles((prev) => [
-      {
-        ...newFile,
-        subject: subject.subjectCode,
-      },
-      ...prev,
-    ]);
+      const subject = subjects.find(
+        (s) => s.id === selectedSubjectId
+      );
 
-    setSelectedFile(null);
-    setSelectedSubjectId("");
+      // Update recent uploads UI
+      setRecentFiles((prev) => [
+        {
+          ...res.data,
+          subject: subject.subjectCode,
+        },
+        ...prev,
+      ]);
+
+      setSelectedFile(null);
+      setSelectedSubjectId("");
+    } catch (err) {
+      console.error("Upload failed:", err.response?.data || err.message);
+    }
   }
 
   return (
@@ -60,14 +75,12 @@ export function UploadPage() {
         {/* Upload Box */}
         <div className="upload-dropzone">
           <LuUpload />
-          <p>
-            Drag & Drop or to upload 
-          </p>
-          {" "}
-            <label className="choose-text">
-              Choose file
-              <input type="file" hidden onChange={handleFileChange} />
-            </label>{" "}
+          <p>Drag & Drop or to upload</p>
+
+          <label className="choose-text">
+            Choose file
+            <input type="file" hidden onChange={handleFileChange} />
+          </label>
         </div>
 
         {/* Subject Select */}
@@ -102,10 +115,10 @@ export function UploadPage() {
 
             <div className="recent-files">
               {recentFiles.map((file) => (
-                <div className="recent-file-card" key={file.id}>
-                  <div className="file-type">{file.type}</div>
+                <div className="recent-file-card" key={file._id}>
+                  <div className="file-type">{file.fileType}</div>
                   <div className="file-details">
-                    <h4>{file.name}</h4>
+                    <h4>{file.fileName}</h4>
                     <p>Uploaded in {file.subject} (Subject)</p>
                   </div>
                 </div>

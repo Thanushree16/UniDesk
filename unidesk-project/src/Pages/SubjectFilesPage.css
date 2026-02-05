@@ -72,25 +72,9 @@
   gap: 6px;
   background: transparent;
   border: none;
-  color: #9ca3af;              /* neutral grey */
   font-size: 0.9rem;
-  padding: 6px 0;
+  padding: 6px;
   cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.back-btn svg {
-  font-size: 18px;
-  color: #9ca3af;              /* same grey as text */
-}
-
-.back-btn:hover {
-  color: #d1d5db;              /* lighter grey on hover */
-  text-decoration: underline;
-}
-
-.back-btn:hover svg {
-  color: #d1d5db;
 }
 
 

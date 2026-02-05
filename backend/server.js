@@ -1,25 +1,29 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
+import cors from "cors";
+import subjectRoutes from "./routes/subjectRoutes.js";
+import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); //Allows frontend (localhost:5173) to talk to backend.
-app.use(express.json()); //Allows backend to read JSON from requests.
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
-// Test route using simple route - /health
-app.get("/health", (req, res) => {
-  res.json({ status: "Backend is running" });
+app.use(express.json());
+
+connectDB();
+
+app.use("/api/subjects", subjectRoutes);
+app.use("/api/files", fileRoutes);
+
+app.get("/", (req, res) => {
+  res.send("UniDesk API running");
 });
 
-// Start server (only if DB is ready or connected)
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-});
+app.listen(5000, () => console.log("Server running on port 5000"));

@@ -2,12 +2,13 @@ import mongoose from "mongoose";
 
 const fileSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    type: { type: String, required: true },
-    size: { type: String, required: true },
-    uploadedAt: { type: Date, default: Date.now },
+    fileName: { type: String, required: true },
+    fileType: { type: String },
+    fileSize: { type: String },
+    fileUrl: { type: String, required: true },
+
   },
-  { _id: true }
+  { timestamps: true }
 );
 
 const subjectSchema = new mongoose.Schema(
