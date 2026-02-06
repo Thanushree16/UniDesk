@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LeftPanel } from "../components/LeftPanel";
@@ -5,11 +6,11 @@ import { Topbar } from "../components/Topbar";
 import { useSubjects } from "../context/SubjectsContext";
 import "./ResourcePage.css";
 
-
 export function ResourcePage() {
   const navigate = useNavigate();
+  const [fileCounts, setFileCounts] = useState({});
 
-  //Year and semester array 
+  //Year and semester array
   const yearSemesterMap = {
     1: [1, 2],
     2: [3, 4],
@@ -20,24 +21,39 @@ export function ResourcePage() {
   //Year and semester selected
   const [selectedYear, setSelectedYear] = useState(4);
   const [selectedSemester, setSelectedSemester] = useState(
-    yearSemesterMap[4][0]
+    yearSemesterMap[4][0],
   );
 
   // Subject data - updated soon
   const { subjects } = useSubjects();
 
- // Auto reset of the semester, when the year is changed
+  // Auto reset of the semester, when the year is changed
   useEffect(() => {
     setSelectedSemester(yearSemesterMap[selectedYear][0]);
   }, [selectedYear]);
 
- //Filtering the subjects according to the selected year and semester
+  useEffect(() => {
+    async function fetchCounts() {
+      const counts = {};
+
+      for (let subject of subjects) {
+        const res = await axios.get(
+          `http://localhost:5000/api/files/count/${subject._id}`,
+        );
+        counts[subject._id] = res.data.count;
+      }
+
+      setFileCounts(counts);
+    }
+
+    if (subjects.length) fetchCounts();
+  }, [subjects]);
+
+  //Filtering the subjects according to the selected year and semester
   const filteredSubjects = subjects.filter(
     (subject) =>
-      subject.year === selectedYear && 
-      subject.semester === selectedSemester
+      subject.year === selectedYear && subject.semester === selectedSemester,
   );
-
 
   useEffect(() => {
     document.title = "Resources | UniDesk";
@@ -76,12 +92,16 @@ export function ResourcePage() {
 
         {/* List of Subjects to appear according to selected details*/}
         <div className="subjects-grid">
-          {filteredSubjects.map((subject) => (
-            <div className="subject-wrapper" key={subject.id}>
-              <div className="subject-card" 
-               onClick={() => navigate(`/resources/${subject.id}`)}
+          {(filteredSubjects || []).map((subject) => (
+            <div className="subject-wrapper" key={subject._id}>
+              <div
+                className="subject-card"
+                onClick={() => navigate(`/resources/${subject._id}`)}
               >
-                <div className="file-count">{subject.files.length} Files</div>
+                <div className="file-count">
+                  {fileCounts[subject._id] || 0}
+                  Files
+                </div>
                 <div className="subject-code">{subject.subjectCode}</div>
                 <div className="subject-strip"></div>
               </div>

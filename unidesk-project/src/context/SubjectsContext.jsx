@@ -8,11 +8,17 @@ export function SubjectsProvider({ children }) {
 
   async function fetchSubjects() {
     try {
-      const res = await axios.get("http://localhost:5000/api/subjects");
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get("http://localhost:5000/api/subjects", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const formatted = res.data.map((s) => ({
         ...s,
-        id: s._id, // frontend convenience
+        id: s._id, 
       }));
 
       setSubjects(formatted);

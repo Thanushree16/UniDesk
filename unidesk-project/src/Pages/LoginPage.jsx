@@ -3,6 +3,7 @@ import "../styles/auth.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import toast from "react-hot-toast";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -25,9 +26,10 @@ export function LoginPage() {
 
       localStorage.setItem("token", data.token);
 
+      toast.success("Login Successful !");
       navigate("/resources");
     } catch (err) {
-      alert(err.response?.data?.message || "Login failed");
+      toast.error(err.response?.data?.message || "Login Failed");
     }
   };
 

@@ -9,46 +9,51 @@ import { AiPage } from "./Pages/Aipage";
 import { UploadPage } from "./Pages/UploadPage";
 import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
 import { ProtectedRoute } from "./components/protectedRoute";
+import { Toaster } from "react-hot-toast";
 
 import "./App.css";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/forgot" element={<ForgotPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/resources/:subjectId" element={<SubjectFilesPage />} />
-      <Route path="/assistant" element={<AiPage />} />
+    <>
+      <Toaster position="top-right" />
 
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot" element={<ForgotPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/resources/:subjectId" element={<SubjectFilesPage />} />
+        <Route path="/assistant" element={<AiPage />} />
 
-      <Route
-        path="/resources"
-        element={
-          <ProtectedRoute>
-            <ResourcePage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-        path="/upload"
-        element={
-          <ProtectedRoute>
-            <UploadPage />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+        <Route
+          path="/resources"
+          element={
+            <ProtectedRoute>
+              <ResourcePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/upload"
+          element={
+            <ProtectedRoute>
+              <UploadPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 }
 

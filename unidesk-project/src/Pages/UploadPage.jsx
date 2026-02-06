@@ -1,22 +1,30 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
-import { useSubjects } from "../context/SubjectsContext";
+import axios from "axios";
 import { LuUpload } from "react-icons/lu";
 import "./UploadPage.css";
 
 export function UploadPage() {
-  const navigate = useNavigate();
-  const { subjects, addFileToSubject } = useSubjects();
-
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedSubjectId, setSelectedSubjectId] = useState("");
+  const [subjects, setSubjects] = useState([]);
   const [recentFiles, setRecentFiles] = useState([]);
 
   useEffect(() => {
     document.title = "Upload Files | UniDesk";
+
+    // fetch subjects from backend
+    const token = localStorage.getItem("token");
+
+    axios
+      .get("http://localhost:5000/api/subjects", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => setSubjects(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   function handleFileChange(e) {
@@ -26,40 +34,29 @@ export function UploadPage() {
   async function handleUpload() {
     if (!selectedFile || !selectedSubjectId) return;
 
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
     try {
-      const fileData = {
-        fileName: selectedFile.name,
-        fileType:
-          selectedFile.type.split("/")[1]?.toUpperCase() || "FILE",
-        fileSize: `${(selectedFile.size / 1024 / 1024).toFixed(1)} MB`,
-      };
-
-      // 🔗 Backend API call
       const res = await axios.post(
-        `http://localhost:5000/api/subjects/${selectedSubjectId}/files`,
-        fileData
-      );
-
-      // Update global subject context
-      addFileToSubject(selectedSubjectId, res.data);
-
-      const subject = subjects.find(
-        (s) => s.id === selectedSubjectId
-      );
-
-      // Update recent uploads UI
-      setRecentFiles((prev) => [
+        `http://localhost:5000/api/files/${selectedSubjectId}`,
+        formData,
         {
-          ...res.data,
-          subject: subject.subjectCode,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-        ...prev,
-      ]);
+      );
+
+      setRecentFiles((prev) => [res.data, ...prev]);
 
       setSelectedFile(null);
       setSelectedSubjectId("");
+
+      alert("File uploaded successfully");
     } catch (err) {
-      console.error("Upload failed:", err.response?.data || err.message);
+      console.error(err);
+      alert("Upload failed");
     }
   }
 
@@ -72,18 +69,15 @@ export function UploadPage() {
 
         <h2 className="page-title">Upload Your Files</h2>
 
-        {/* Upload Box */}
         <div className="upload-dropzone">
           <LuUpload />
-          <p>Drag & Drop or to upload</p>
-
+          <p>Drag & Drop or</p>
           <label className="choose-text">
             Choose file
             <input type="file" hidden onChange={handleFileChange} />
           </label>
         </div>
 
-        {/* Subject Select */}
         <div className="subject-select">
           <label>Select Subject</label>
           <select
@@ -92,14 +86,13 @@ export function UploadPage() {
           >
             <option value="">Choose subject</option>
             {subjects.map((subject) => (
-              <option key={subject.id} value={subject.id}>
+              <option key={subject._id} value={subject._id}>
                 {subject.subjectName} ({subject.subjectCode})
               </option>
             ))}
           </select>
         </div>
 
-        {/* Upload Button */}
         <button
           className="upload-btn"
           disabled={!selectedFile || !selectedSubjectId}
@@ -108,7 +101,6 @@ export function UploadPage() {
           Upload
         </button>
 
-        {/* Recently Uploaded */}
         {recentFiles.length > 0 && (
           <>
             <h3 className="recent-title">Uploaded Files</h3>
@@ -119,7 +111,7 @@ export function UploadPage() {
                   <div className="file-type">{file.fileType}</div>
                   <div className="file-details">
                     <h4>{file.fileName}</h4>
-                    <p>Uploaded in {file.subject} (Subject)</p>
+                    <p>{file.fileSize}</p>
                   </div>
                 </div>
               ))}

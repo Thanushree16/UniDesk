@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import "./RegisterPage.css";
 import "../styles/auth.css";
+import toast from "react-hot-toast";
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -31,10 +32,11 @@ export function RegisterPage() {
         password,
       });
 
-      alert("Registration successful. Please login.");
+      toast.success("Registered successfully");
       navigate("/login");
     } catch (err) {
-      alert(err.response?.data?.message || "Registration failed");
+      toast.error(err.response?.data?.message || "Registration failed");
+
     }
   };
 

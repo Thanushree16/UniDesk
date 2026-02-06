@@ -5,7 +5,7 @@ import subjectRoutes from "./routes/subjectRoutes.js";
 import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
-
+import multer from "multer";  
 
 dotenv.config();
 
@@ -18,6 +18,8 @@ app.use(
 );
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
+
 
 connectDB();
 

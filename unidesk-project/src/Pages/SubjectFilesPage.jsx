@@ -15,8 +15,9 @@ export function SubjectFilesPage() {
     async function fetchSubject() {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/subjects/${subjectId}`
+          `http://localhost:5000/api/subjects/${subjectId}`,
         );
+
         setSubject(res.data);
       } catch (err) {
         console.error(err);
@@ -35,13 +36,17 @@ export function SubjectFilesPage() {
       <LeftPanel />
       <main className="main">
         <Topbar />
-         <button className="back-btn" onClick={() => navigate("/resources")}>
+        <button className="back-btn" onClick={() => navigate("/resources")}>
           <IoIosArrowBack />
         </button>
 
         <h2 className="subject-title">Files</h2>
 
-        <h2>{subject.subjectName} ({subject.subjectCode})</h2>
+        <h2>
+          {subject.subjectName} ({subject.subjectCode})
+        </h2>
+
+        
 
         {subject.files.length === 0 ? (
           <p>No files uploaded yet.</p>
@@ -49,12 +54,12 @@ export function SubjectFilesPage() {
           subject.files.map((file) => (
             <div key={file._id}>
               <h4>{file.fileName}</h4>
-              <p>{file.fileType} • {file.fileSize}</p>
+              <p>
+                {file.fileType} • {file.fileSize}
+              </p>
             </div>
           ))
         )}
-        
-        
       </main>
     </div>
   );
