@@ -71,6 +71,30 @@ export function ResourcePage() {
     document.title = "Resources | UniDesk";
   }, []);
 
+  const [showModal, setShowModal] = useState(false);
+
+  const [newSubject, setNewSubject] = useState({
+    subjectName: "",
+    subjectCode: "",
+    year: 4,
+    semester: 7,
+  });
+
+  async function handleCreateSubject() {
+    try {
+      const token = localStorage.getItem("token");
+
+      await axios.post("http://localhost:5000/api/subjects", newSubject, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setShowModal(false);
+      window.location.reload(); // simple refresh for now
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="dashboard-layout">
       <LeftPanel />
@@ -100,7 +124,16 @@ export function ResourcePage() {
           </select>
         </div>
 
-        <h2 className="subject-title">Subjects</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2 className="subject-title">Subjects</h2>
+
+          <button
+            onClick={() => setShowModal(true)}
+            className="add-subject-btn"
+          >
+            Add Subject
+          </button>
+        </div>
 
         {/* List of Subjects to appear according to selected details*/}
         <div className="subjects-grid">
@@ -120,6 +153,50 @@ export function ResourcePage() {
             </div>
           ))}
         </div>
+
+        {showModal && (
+          <div className="modal">
+            <div className="modal-content">
+              <h3>Add Subject</h3>
+
+              <input
+                placeholder="Subject Name"
+                onChange={(e) =>
+                  setNewSubject({ ...newSubject, subjectName: e.target.value })
+                }
+              />
+
+              <input
+                placeholder="Subject Code"
+                onChange={(e) =>
+                  setNewSubject({ ...newSubject, subjectCode: e.target.value })
+                }
+              />
+
+              <input
+                type="number"
+                placeholder="Year"
+                onChange={(e) =>
+                  setNewSubject({ ...newSubject, year: Number(e.target.value) })
+                }
+              />
+
+              <input
+                type="number"
+                placeholder="Semester"
+                onChange={(e) =>
+                  setNewSubject({
+                    ...newSubject,
+                    semester: Number(e.target.value),
+                  })
+                }
+              />
+
+              <button onClick={handleCreateSubject}>Create</button>
+              <button onClick={() => setShowModal(false)}>Cancel</button>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

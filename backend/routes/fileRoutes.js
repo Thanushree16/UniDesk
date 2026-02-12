@@ -55,7 +55,7 @@ router.get("/count/:subjectId", protect, async (req, res) => {
   res.json({ count });
 });
 
-router.get("/open/:fileId", protect, async (req, res) => {
+router.get("/open/:fileId", async (req, res) => {
   try {
     const file = await File.findById(req.params.fileId);
 

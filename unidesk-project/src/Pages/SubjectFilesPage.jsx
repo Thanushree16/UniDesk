@@ -40,11 +40,17 @@ export function SubjectFilesPage() {
   }, [subjectId]);
 
   
-  function openFile(url) {
-    if (!url) return;
+function openFile(fileId) {
+  const token = localStorage.getItem("token");
 
-    window.open(url, "_blank", "noopener,noreferrer");
-  }
+  if (!fileId) return;
+
+  window.open(
+    `http://localhost:5000/api/files/open/${fileId}?token=${token}`,
+    "_blank"
+  );
+}
+
 
   if (loading) return <p>Loading...</p>;
 
@@ -74,7 +80,7 @@ export function SubjectFilesPage() {
               <p>{file.fileSize}</p>
 
               <button
-                onClick={() => openFile(file.fileUrl)}
+                onClick={() => openFile(file._id)}
                 className="open-btn"
               >
                 Open File
