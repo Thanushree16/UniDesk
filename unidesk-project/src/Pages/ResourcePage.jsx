@@ -8,7 +8,7 @@ import "./ResourcePage.css";
 
 export function ResourcePage() {
   const navigate = useNavigate();
-  const [fileCounts, setFileCounts] = useState({});
+  const [fileCounts, setCounts] = useState({});
 
   //Year and semester array
   const yearSemesterMap = {
@@ -34,16 +34,28 @@ export function ResourcePage() {
 
   useEffect(() => {
     async function fetchCounts() {
-      const counts = {};
+      try {
+        const token = localStorage.getItem("token");
 
-      for (let subject of subjects) {
-        const res = await axios.get(
-          `http://localhost:5000/api/files/count/${subject._id}`,
+        const countsObj = {};
+
+        await Promise.all(
+          subjects.map(async (sub) => {
+            const res = await axios.get(
+              `http://localhost:5000/api/files/count/${sub._id}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              },
+            );
+
+            countsObj[sub._id] = res.data.count;
+          }),
         );
-        counts[subject._id] = res.data.count;
-      }
 
-      setFileCounts(counts);
+        setCounts(countsObj);
+      } catch (err) {
+        console.error("Error fetching counts:", err);
+      }
     }
 
     if (subjects.length) fetchCounts();
@@ -99,8 +111,7 @@ export function ResourcePage() {
                 onClick={() => navigate(`/resources/${subject._id}`)}
               >
                 <div className="file-count">
-                  {fileCounts[subject._id] || 0}
-                  Files
+                  {fileCounts[subject._id] || 0} Files
                 </div>
                 <div className="subject-code">{subject.subjectCode}</div>
                 <div className="subject-strip"></div>

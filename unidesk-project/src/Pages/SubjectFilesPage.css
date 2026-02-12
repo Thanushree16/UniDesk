@@ -35,6 +35,7 @@
   padding: 16px 18px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   transition: background 0.25s ease, transform 0.2s ease;
 }
 
@@ -45,15 +46,45 @@
 
 /* ===== File Info ===== */
 
+.file-info {
+  flex: 1;
+}
+
 .file-info h4 {
   font-size: 0.95rem;
   font-weight: 500;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 .file-info p {
   font-size: 0.75rem;
   opacity: 0.8;
+  margin: 2px 0 0 0;
+}
+
+/* ===== Open Button ===== */
+
+.open-btn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.open-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.open-btn:active {
+  transform: translateY(0);
 }
 
 /* ===== Back Button ===== */
@@ -63,7 +94,6 @@
   gap: 10px;
   margin-bottom: 12px;
 }
-
 
 .back-btn {
   margin-top: 26px;
@@ -75,8 +105,13 @@
   font-size: 0.9rem;
   padding: 6px;
   cursor: pointer;
+  color: #ffffff;
+  transition: opacity 0.2s ease;
 }
 
+.back-btn:hover {
+  opacity: 0.8;
+}
 
 /* ===== Empty / Not Found State ===== */
 
@@ -99,12 +134,28 @@
 
   .file-card {
     padding: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .open-btn {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
   }
 }
 
 @media (max-width: 600px) {
+  .main {
+    padding: 15px;
+  }
+
   .subject-title {
     font-size: 1.2rem;
+  }
+
+  .file-card {
+    padding: 12px;
   }
 
   .file-info h4 {

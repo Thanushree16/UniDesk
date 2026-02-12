@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
-import axios from "axios";
 import { LuUpload } from "react-icons/lu";
+import axios from "axios";
+import toast from "react-hot-toast";
 import "./UploadPage.css";
 
 export function UploadPage() {
@@ -14,7 +15,6 @@ export function UploadPage() {
   useEffect(() => {
     document.title = "Upload Files | UniDesk";
 
-    // fetch subjects from backend
     const token = localStorage.getItem("token");
 
     axios
@@ -32,33 +32,37 @@ export function UploadPage() {
   }
 
   async function handleUpload() {
-    if (!selectedFile || !selectedSubjectId) return;
+  if (!selectedFile || !selectedSubjectId) return;
 
+  try {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    try {
-      const res = await axios.post(
-        `http://localhost:5000/api/files/${selectedSubjectId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+    const token = localStorage.getItem("token");
+
+    const res = await axios.post(
+      `http://localhost:5000/api/files/upload/${selectedSubjectId}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
-      );
+      }
+    );
 
-      setRecentFiles((prev) => [res.data, ...prev]);
+    setRecentFiles((prev) => [res.data.file, ...prev]);
 
-      setSelectedFile(null);
-      setSelectedSubjectId("");
+    setSelectedFile(null);
+    setSelectedSubjectId("");
 
-      alert("File uploaded successfully");
-    } catch (err) {
-      console.error(err);
-      alert("Upload failed");
-    }
+    toast.success("File uploaded successfully");
+  } catch (error) {
+    console.error(error);
+    toast.error("Upload failed");
   }
+}
+
 
   return (
     <div className="dashboard-layout">
@@ -108,7 +112,7 @@ export function UploadPage() {
             <div className="recent-files">
               {recentFiles.map((file) => (
                 <div className="recent-file-card" key={file._id}>
-                  <div className="file-type">{file.fileType}</div>
+                  
                   <div className="file-details">
                     <h4>{file.fileName}</h4>
                     <p>{file.fileSize}</p>

@@ -1,13 +1,15 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+
+
+import express from "express";
 import cors from "cors";
 import subjectRoutes from "./routes/subjectRoutes.js";
 import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
-import multer from "multer";  
 
-dotenv.config();
+
 
 const app = express();
 

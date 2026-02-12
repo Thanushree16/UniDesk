@@ -8,17 +8,27 @@ import { IoIosArrowBack } from "react-icons/io";
 export function SubjectFilesPage() {
   const navigate = useNavigate();
   const { subjectId } = useParams();
+
+  const [files, setFiles] = useState([]);
   const [subject, setSubject] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchSubject() {
+    async function fetchData() {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/subjects/${subjectId}`,
-        );
+        const token = localStorage.getItem("token");
 
-        setSubject(res.data);
+        const [filesRes, subjectRes] = await Promise.all([
+          axios.get(`http://localhost:5000/api/files/subject/${subjectId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          axios.get(`http://localhost:5000/api/subjects/${subjectId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
+
+        setFiles(filesRes.data);
+        setSubject(subjectRes.data);
       } catch (err) {
         console.error(err);
       } finally {
@@ -26,37 +36,49 @@ export function SubjectFilesPage() {
       }
     }
 
-    fetchSubject();
+    fetchData();
   }, [subjectId]);
+
+  
+  function openFile(url) {
+    if (!url) return;
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <div className="dashboard-layout">
       <LeftPanel />
+
       <main className="main">
         <Topbar />
+
         <button className="back-btn" onClick={() => navigate("/resources")}>
           <IoIosArrowBack />
         </button>
 
-        <h2 className="subject-title">Files</h2>
+        {subject && (
+          <h2 className="subject-title">
+            {subject.subjectName} ({subject.subjectCode})
+          </h2>
+        )}
 
-        <h2>
-          {subject.subjectName} ({subject.subjectCode})
-        </h2>
-
-        
-
-        {subject.files.length === 0 ? (
+        {files.length === 0 ? (
           <p>No files uploaded yet.</p>
         ) : (
-          subject.files.map((file) => (
+          files.map((file) => (
             <div key={file._id}>
               <h4>{file.fileName}</h4>
-              <p>
-                {file.fileType} • {file.fileSize}
-              </p>
+              <p>{file.fileSize}</p>
+
+              <button
+                onClick={() => openFile(file.fileUrl)}
+                className="open-btn"
+              >
+                Open File
+              </button>
             </div>
           ))
         )}
