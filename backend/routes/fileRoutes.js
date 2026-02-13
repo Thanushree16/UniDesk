@@ -10,7 +10,6 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 
-//to upload a file
 router.post("/upload/:subjectId", protect, upload.single("file"), async (req, res) => {
   try {
     const file = req.file;
@@ -56,20 +55,17 @@ router.post("/upload/:subjectId", protect, upload.single("file"), async (req, re
 });
 
 
-//to get files by subject
 router.get("/subject/:subjectId", protect, async (req, res) => {
   const files = await File.find({ subject: req.params.subjectId });
   res.json(files);
 });
 
 
-//to count a file
 router.get("/count/:subjectId", protect, async (req, res) => {
   const count = await File.countDocuments({ subject: req.params.subjectId });
   res.json({ count });
 });
 
-//to delete a file
 router.delete("/:fileId", protect, async (req, res) => {
   try {
     const file = await File.findById(req.params.fileId);
@@ -94,6 +90,15 @@ router.delete("/:fileId", protect, async (req, res) => {
 
     res.json({ message: "File deleted successfully" });
 
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/total-count", protect, async (req, res) => {
+  try {
+    const count = await File.countDocuments();
+    res.json({ count });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

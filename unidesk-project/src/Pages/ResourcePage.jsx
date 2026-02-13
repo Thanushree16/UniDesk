@@ -10,6 +10,22 @@ import toast from "react-hot-toast";
 import "./ResourcePage.css";
 
 export function ResourcePage() {
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialYear = Number(searchParams.get("year")) || 4;
+  const initialSem = Number(searchParams.get("semester")) || 7;
+
+  const [selectedYear, setSelectedYear] = useState(initialYear);
+  const [selectedSemester, setSelectedSemester] = useState(initialSem);
+
+  useEffect(() => {
+    setSearchParams({
+      year: selectedYear,
+      semester: selectedSemester,
+    });
+  }, [selectedYear, selectedSemester]);
+
   const navigate = useNavigate();
   const [fileCounts, setCounts] = useState({});
 
@@ -20,20 +36,8 @@ export function ResourcePage() {
     4: [7, 8],
   };
 
-  const [searchParams] = useSearchParams();
-
-  const initialYear = Number(searchParams.get("year")) || 4;
-  const initialSem = Number(searchParams.get("sem")) || 7;
-
-  const [selectedYear, setSelectedYear] = useState(initialYear);
-  const [selectedSemester, setSelectedSemester] = useState(initialSem);
 
   const { subjects, setSubjects } = useSubjects();
-
-  useEffect(() => {
-    setSelectedSemester(yearSemesterMap[selectedYear][0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedYear]);
 
   useEffect(() => {
     async function fetchCounts() {
@@ -45,7 +49,7 @@ export function ResourcePage() {
         await Promise.all(
           subjects.map(async (sub) => {
             const res = await axios.get(
-              `http://localhost:5000/api/files/count/${sub._id}`,
+              `${import.meta.env.VITE_API_URL}/api/files/count/${sub._id}`,
               {
                 headers: { Authorization: `Bearer ${token}` },
               },
@@ -83,16 +87,16 @@ export function ResourcePage() {
   });
 
   async function handleCreateSubject() {
-    if (!newSubject.subjectName.trim() || !newSubject.subjectCode.trim()) {
-      toast.error("Please fill all fields");
-      return;
-    }
+    // if (!newSubject.subjectName.trim() || !newSubject.subjectCode.trim()) {
+    //   toast.error("Please fill all fields");
+    //   return;
+    // }
 
     try {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:5000/api/subjects",
+        `${import.meta.env.VITE_API_URL}/api/subjects`,
         newSubject,
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -104,7 +108,7 @@ export function ResourcePage() {
 
       toast.success("Subject created");
     } catch (err) {
-      console.error(err);
+      console.error("Create subject error:",err?.response?.data || err.message);
       toast.error("Creation failed");
     }
   }
@@ -171,7 +175,7 @@ export function ResourcePage() {
                   className="subject-content"
                   onClick={() =>
                     navigate(
-                      `/resources/${subject._id}?year=${selectedYear}&sem=${selectedSemester}`,
+                      `/resources/${subject._id}?year=${selectedYear}&semester=${selectedSemester}`,
                     )
                   }
                 >

@@ -3,6 +3,7 @@ import axios from "axios";
 
 const SubjectsContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export function SubjectsProvider({ children }) {
   const [subjects, setSubjects] = useState([]);
 
@@ -39,6 +40,7 @@ export function SubjectsProvider({ children }) {
     <SubjectsContext.Provider
       value={{
         subjects,
+        setSubjects,
         refreshSubjects,
       }}
     >
@@ -47,6 +49,7 @@ export function SubjectsProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSubjects() {
   return useContext(SubjectsContext);
 }

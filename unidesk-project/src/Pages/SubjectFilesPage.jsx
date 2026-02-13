@@ -15,7 +15,7 @@ export function SubjectFilesPage() {
 
   const [searchParams] = useSearchParams();
   const year = searchParams.get("year");
-  const sem = searchParams.get("sem");
+  const sem = searchParams.get("semester");
 
   const [files, setFiles] = useState([]);
   const [subject, setSubject] = useState(null);
@@ -56,7 +56,7 @@ export function SubjectFilesPage() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`http://localhost:5000/api/files/${fileId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/files/${fileId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -81,7 +81,7 @@ export function SubjectFilesPage() {
 
         <button
           className="back-btn"
-          onClick={() => navigate(`/resources?year=${year}&sem=${sem}`)}
+          onClick={() => navigate(`/resources?year=${year}&semester=${sem}`)}
         >
           <IoIosArrowBack size={20} />
           <span>Back</span>

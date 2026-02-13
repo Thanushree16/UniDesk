@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { TfiControlBackward } from "react-icons/tfi";
 import api from "../services/api";
 import "./RegisterPage.css";
-import "../styles/auth.css";
 import toast from "react-hot-toast";
 
 export function RegisterPage() {
@@ -21,12 +21,13 @@ export function RegisterPage() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return alert("Passwords do not match");
+      toast.error("Passwords do not match");
+      return;
     }
 
     try {
       await api.post("/auth/register", {
-        name: rollNumber, 
+        name: rollNumber,
         email,
         rollNumber,
         password,
@@ -36,78 +37,91 @@ export function RegisterPage() {
       navigate("/login");
     } catch (err) {
       toast.error(err.response?.data?.message || "Registration failed");
-
     }
   };
 
   return (
     <div className="auth-page">
-      <div className="top-banner">Step Into Smarter Studying with UniDesk.</div>
-
-      <div className="container">
-        <div className="left-panel">
+      {/* Navbar */}
+      <nav className="auth-navbar">
+        <Link to="/" className="nav-back-btn">
+          <TfiControlBackward />Back to Home
+        </Link>
+        <div className="nav-logo">
           <img
-            className="main-image"
-            src="/assets/images/register.gif"
-            alt="Register Animation"
+            src="/assets/images/Logo.png"
+            alt="UniDesk Logo"
+            className="nav-logo-icon"
           />
+          <span className="nav-logo-text">UniDesk</span>
         </div>
+      </nav>
 
-        <div className="right-panel">
-          <div className="center-logo">
-            <img
-              src="/assets/images/Logo.png"
-              alt="UniDesk Logo"
-              className="center-logo-icon"
-            />
-            <span>UniDesk</span>
-          </div>
+      <div className="auth-container">
+        {/* Register Card */}
+        <div className="register-card">
+          <h2>Create Account</h2>
+          <p className="subtitle">Sign up to get started with UniDesk</p>
 
-          <div className="register-box">
-            <h2>Register</h2>
-
-            <form autoComplete="off" onSubmit={handleRegister}>
-              <label>Email Address</label>
+          <form onSubmit={handleRegister}>
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
               <input
                 type="email"
+                id="email"
+                placeholder="Enter your email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+            </div>
 
-              <label>Roll Number</label>
+            <div className="form-group">
+              <label htmlFor="roll">Roll Number</label>
               <input
                 type="text"
+                id="roll"
+                placeholder="Enter your roll number"
                 required
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
               />
+            </div>
 
-              <label>Create Password</label>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
+                id="password"
+                placeholder="Create a password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+            </div>
 
-              <label>Confirm Password</label>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-
-              <button type="submit">Register</button>
-            </form>
-
-            <div className="login-link">
-              Already have an account?
-              <Link to="/login">
-                <u> Login</u>
-              </Link>
             </div>
+
+            <button type="submit" className="register-btn">
+              Create Account
+            </button>
+          </form>
+
+          <div className="login-link">
+            Already have an account?{" "}
+            <Link to="/login" className="login-link-text">
+              Sign in
+            </Link>
           </div>
         </div>
       </div>

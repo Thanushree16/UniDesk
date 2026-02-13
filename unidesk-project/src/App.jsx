@@ -10,6 +10,7 @@ import { UploadPage } from "./Pages/UploadPage";
 import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
 import { ProfilePage } from "./Pages/ProfilePage";
 import { NotificationsPage } from "./Pages/NotificationPage";
+import { Logout } from "./components/Logout";
 import { ProtectedRoute } from "./components/protectedRoute";
 
 import { Toaster } from "react-hot-toast";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/assistant" element={<AiPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/logout" element={<Logout />} />
 
 
         <Route

@@ -66,7 +66,7 @@ export function LeftPanel() {
       )}
 
       {/* Logout */}
-      <div className="logout" onClick={() => navigate("/login")}>
+      <div className="logout" onClick={() => navigate("/logout")} >
         <BiLogOut />
         {!collapsed && <span>Logout</span>}
       </div>

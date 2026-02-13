@@ -1,212 +1,236 @@
-/* ===== Page Container ===== */
-
+/* ===== Auth Page ===== */
 .auth-page {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #050b18, #031b3f);
+  background-image: none;
 }
 
-/* ===== Top Left Banner ===== */
-
-.top-banner {
-    position: absolute;
-    top: 40px;
-    left: 80px;
-    background: rgba(178, 58, 72, 0.95);
-    color: #fff;
-    padding: 18px 42px;
-    border-radius: 20px;
-    font-size: 1.45rem;
-    font-weight: 700;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-    z-index: 5;
+/* ===== Navbar ===== */
+.auth-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
-/* ===== Centered Logo Above Form ===== */
-
-.center-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 18px;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 600;
+.nav-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.center-logo-icon {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
+.nav-back-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-2px);
 }
 
-/* ===== Main Layout ===== */
-
-.container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 100px;
-    gap: 60px;
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* ===== Left Panel ===== */
-
-.left-panel {
-    flex: 1.2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.nav-logo-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
 }
 
-/* ===== Illustration ===== */
-
-.main-image {
-    width: 520px;
-    height: 520px;
-    object-fit: contain;
-    border-radius: 22px;
+.nav-logo-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #a8c0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ===== Right Panel ===== */
-
-.right-panel {
-    flex: 0.9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;   /* vertical centering */
-    transform: translateY(-20px); /* ⬆ subtle upward shift */
+/* ===== Container ===== */
+.auth-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
-/* ===== Logo (inside panel – unused now, kept safe) ===== */
-
-.logo {
-    display: none;
+/* ===== Register Card ===== */
+.register-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 48px 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== Register Box ===== */
-
-.register-box {
-    background: rgba(178, 58, 72, 0.95);
-    border-radius: 22px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    padding: 26px 32px 28px;
-    width: 380px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
+.register-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-align: center;
+  color: #ffffff;
 }
 
-/* ===== Heading ===== */
-
-.register-box h2 {
-    margin-bottom: 16px;
-    font-size: 1.8rem;
-    text-align: center;
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  margin: 0 0 36px 0;
 }
 
 /* ===== Form ===== */
-
-.register-box label {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.register-box input {
-    padding: 10px 12px;
-    margin-bottom: 14px;
-    border-radius: 8px;
-    border: none;
-    font-size: 0.95rem;
-    outline: none;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* ===== Button ===== */
-
-.register-box button {
-    margin-top: 6px;
-    padding: 12px 0;
-    font-size: 1rem;
-    border-radius: 10px;
-    background: #e63946;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.register-box button:hover {
-    background: #b23a48;
+.form-group input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #667eea;
+}
+
+/* ===== Register Button ===== */
+.register-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.register-btn:active {
+  transform: translateY(0);
 }
 
 /* ===== Login Link ===== */
-
 .login-link {
-    margin-top: 8px;
-    font-size: 0.9rem;
-    text-align: center;
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-/* ===== Responsive Fixes ===== */
-
-/* Tablets & smaller laptops */
-@media (max-width: 1100px) {
-    .main-image {
-        width: 420px;
-        height: 420px;
-    }
-
-    .container {
-        padding: 0 40px;
-    }
+.login-link-text {
+  color: #a8c0ff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+  transition: color 0.2s ease;
 }
 
-/* Tablets */
-@media (max-width: 900px) {
-    .top-banner,
-    .top-logo {
-        display: none;
-    }
-
-    .container {
-        flex-direction: column;
-        justify-content: center;
-        gap: 30px;
-        height: auto;
-        padding: 40px 20px;
-    }
-
-    .left-panel {
-        justify-content: center;
-        padding-left: 0;
-    }
-
-    .main-image {
-        width: 320px;
-        height: 320px;
-    }
-
-    .right-panel {
-        transform: none;
-    }
-
-    .register-box {
-        width: 90vw;
-        max-width: 380px;
-    }
+.login-link-text:hover {
+  color: #667eea;
+  text-decoration: underline;
 }
 
-/* Mobile */
+/* ===== Responsive ===== */
 @media (max-width: 600px) {
-    .main-image {
-        display: none; /* 🔥 KEY FIX */
-    }
+  .auth-navbar {
+    padding: 16px 24px;
+  }
 
-    .register-box {
-        width: 92vw;
-        padding: 22px 20px;
-    }
+  .nav-logo-text {
+    font-size: 1.1rem;
+  }
+
+  .nav-logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-back-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .auth-container {
+    padding: 20px 15px;
+  }
+
+  .register-card {
+    padding: 30px 24px;
+  }
+
+  .register-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .auth-navbar {
+    padding: 16px 16px;
+  }
+
+  .register-card {
+    padding: 24px 20px;
+  }
+
+  .register-card h2 {
+    font-size: 1.3rem;
+  }
 }
