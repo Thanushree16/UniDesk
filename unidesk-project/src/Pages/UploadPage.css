@@ -3,7 +3,7 @@
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 22px;
-  margin-top:22px;
+  margin-top: 40px;
 }
 
 /* Upload Dropzone */
@@ -16,6 +16,7 @@
   text-align: center;
   background: rgba(255, 255, 255, 0.02);
 }
+
 
 .upload-icon {
   font-size: 1.8rem;

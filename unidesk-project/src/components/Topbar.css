@@ -69,6 +69,7 @@
 /* Notification dot */
 .notification-bell {
   position: relative;
+  transform : translateY(5px);
 }
 
 .notification-bell::after {
@@ -86,4 +87,16 @@
 /* Profile icon size */
 .profile-icon {
   font-size: 22px;
+  
+}
+
+.notif-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
 }

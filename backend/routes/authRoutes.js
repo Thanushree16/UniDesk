@@ -1,6 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { protect } from "../middleware/authMiddleware.js";
 import { User } from "../models/user.js";
 
 const router = express.Router();
@@ -13,7 +14,9 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "All fields required" });
     }
 
-    const existingUser = await User.findOne({ email }, { rollNumber });
+    const existingUser = await User.findOne( {
+      $or: [{ email }, { rollNumber }],
+    });
 
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
@@ -32,7 +35,10 @@ router.post("/register", async (req, res) => {
       expiresIn: "7d",
     });
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ 
+      message: "User registered successfully" ,
+      token
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -52,11 +58,20 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
     res.json({ token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/me", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -8,7 +8,7 @@ import subjectRoutes from "./routes/subjectRoutes.js";
 import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
-
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 
 const app = express();
@@ -28,6 +28,7 @@ connectDB();
 app.use("/api/subjects", subjectRoutes);
 app.use("/api/files", fileRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 
 app.get("/", (req, res) => {
