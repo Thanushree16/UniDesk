@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
 export function NavBar() {
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,8 +26,12 @@ export function NavBar() {
 
   return (
     <header className="navbar" id="navbar">
-      <div className="logo">
-        <img src="/assets/images/Logo.png" alt="UniDesk Logo" onClick={() => navigate("/Hero")} />
+      <div
+        className="logo"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        style={{ cursor: "pointer" }}
+      >
+        <img src="/assets/images/Logo.png" alt="UniDesk Logo" />
         <span>UniDesk</span>
       </div>
 
@@ -39,8 +42,12 @@ export function NavBar() {
       </nav>
 
       <div className="nav-buttons">
-        <Link to="/login" className="btn login">Login</Link>
-        <Link to="/register" className="btn register">Register Now</Link>
+        <Link to="/login" className="btn login">
+          Login
+        </Link>
+        <Link to="/register" className="btn register">
+          Register Now
+        </Link>
       </div>
     </header>
   );
