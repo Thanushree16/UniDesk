@@ -29,7 +29,7 @@ export function RegisterPage() {
     }
 
     try {
-      await api.post("/auth/register", {
+      await api.post("/api/auth/register", {
         name: rollNumber,
         email,
         rollNumber,

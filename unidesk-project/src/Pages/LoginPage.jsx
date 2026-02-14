@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 export function LoginPage() {
   const { refreshSubjects } = useSubjects();
-  
+
   const navigate = useNavigate();
 
   const [rollNumber, setRollNumber] = useState("");
@@ -22,7 +22,7 @@ export function LoginPage() {
     e.preventDefault();
 
     try {
-      const { data } = await api.post("/auth/login", {
+      const { data } = await api.post("api/auth/login", {
         rollNumber,
         password,
       });
