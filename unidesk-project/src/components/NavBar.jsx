@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
 export function NavBar() {
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +28,7 @@ export function NavBar() {
   return (
     <header className="navbar" id="navbar">
       <div className="logo">
-        <img src="/assets/images/Logo.png" alt="UniDesk Logo" />
+        <img src="/assets/images/Logo.png" alt="UniDesk Logo" onClick={() => navigate("/Hero")} />
         <span>UniDesk</span>
       </div>
 
