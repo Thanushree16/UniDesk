@@ -9,7 +9,6 @@ export function SubjectsProvider({ children }) {
 
   async function fetchSubjects() {
     try {
-
       const res = await api.get("/api/subjects");
 
       const formatted = res.data.map((s) => ({
@@ -19,12 +18,21 @@ export function SubjectsProvider({ children }) {
 
       setSubjects(formatted);
     } catch (err) {
-      console.error("Failed to fetch subjects", err);
+      if (err.response?.status === 401) {
+        console.log("Not authenticated - subjects will load after login");
+      } else {
+        console.error("Failed to fetch subjects", err);
+      }
     }
   }
 
   useEffect(() => {
-    fetchSubjects();
+
+    const token = localStorage.getItem("token");
+    
+    if (token) {
+      fetchSubjects();
+    }
   }, []);
 
   async function refreshSubjects() {
