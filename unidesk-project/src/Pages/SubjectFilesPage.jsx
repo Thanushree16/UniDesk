@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
+import api from "../services/api";  // ✅ Fixed import
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
 import { IoIosArrowBack } from "react-icons/io";
@@ -24,15 +24,9 @@ export function SubjectFilesPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = localStorage.getItem("token");
-
         const [filesRes, subjectRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/files/subject/${subjectId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get(`http://localhost:5000/api/subjects/${subjectId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
+          api.get(`/api/files/subject/${subjectId}`),  
+          api.get(`/api/subjects/${subjectId}`),        
         ]);
 
         setFiles(filesRes.data);
@@ -54,15 +48,9 @@ export function SubjectFilesPage() {
 
   async function deleteFile(fileId) {
     try {
-      const token = localStorage.getItem("token");
+      await api.delete(`/api/files/${fileId}`); 
 
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/files/${fileId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      // remove from UI instantly
       setFiles((prev) => prev.filter((f) => f._id !== fileId));
-
       toast.success("File deleted");
     } catch (err) {
       console.error(err);
