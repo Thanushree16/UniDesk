@@ -9,7 +9,9 @@ import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import mongoose from "mongoose";
 
+mongoose.connect(process.env.MONGO_URI);
 
 const app = express();
 
