@@ -7,13 +7,13 @@ import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // GET all subjects
-router.get("/", protect, async (req, res) => {
+router.get("/", async (req, res) => {
   const subjects = await Subject.find();
   res.json(subjects);
 });
 
 // GET single subject
-router.get("/:id", protect, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const subject = await Subject.findById(req.params.id);
 
@@ -28,7 +28,7 @@ router.get("/:id", protect, async (req, res) => {
 });
 
 // CREATE subject
-router.post("/", protect, async (req, res) => {
+router.post("/",  async (req, res) => {
   try {
     const { subjectName, subjectCode, year, semester } = req.body;
 
