@@ -2,7 +2,7 @@ import { BiBell, BiSearch } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import "./Topbar.css";
 
 export function Topbar() {
@@ -12,12 +12,9 @@ export function Topbar() {
   useEffect(() => {
     async function fetchCount() {
       try {
-        const token = localStorage.getItem("token");
 
-        const res = await axios.get(
-          "http://localhost:5000/api/notifications/unread-count",
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
+
+        const res = await api.get("/api/notifications/unread-count");
 
         setCount(res.data.count);
       } catch (err) {

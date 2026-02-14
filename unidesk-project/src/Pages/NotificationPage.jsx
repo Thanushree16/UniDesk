@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
 
@@ -8,12 +8,8 @@ export function NotificationsPage() {
 
   useEffect(() => {
     async function fetchNotifications() {
-      const token = localStorage.getItem("token");
 
-      const res = await axios.get(
-        "http://localhost:5000/api/notifications",
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await api.get("/api/notifications");
 
       setNotifications(res.data);
     }
@@ -22,13 +18,8 @@ export function NotificationsPage() {
   }, []);
 
   async function markRead(id) {
-    const token = localStorage.getItem("token");
 
-    await axios.put(
-      `http://localhost:5000/api/notifications/${id}/read`,
-      {},
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    await api.put(`/api/notifications/${id}/read`);
 
     setNotifications((prev) =>
       prev.map((n) => (n._id === id ? { ...n, isRead: true } : n))

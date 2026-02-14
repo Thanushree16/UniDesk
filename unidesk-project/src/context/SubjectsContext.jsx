@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 const SubjectsContext = createContext();
 
@@ -9,13 +9,8 @@ export function SubjectsProvider({ children }) {
 
   async function fetchSubjects() {
     try {
-      const token = localStorage.getItem("token");
 
-      const res = await axios.get("http://localhost:5000/api/subjects", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await api.get("/api/subjects");
 
       const formatted = res.data.map((s) => ({
         ...s,

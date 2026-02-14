@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
 import { LuUpload } from "react-icons/lu";
-import axios from "axios";
+import api from "../services/api";
 import toast from "react-hot-toast";
 import "./UploadPage.css";
 
@@ -15,14 +15,7 @@ export function UploadPage() {
   useEffect(() => {
     document.title = "Upload Files | UniDesk";
 
-    const token = localStorage.getItem("token");
-
-    axios
-      .get("http://localhost:5000/api/subjects", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    api.get("/api/subjects")
       .then((res) => setSubjects(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -38,18 +31,7 @@ export function UploadPage() {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    const token = localStorage.getItem("token");
-
-    const res = await axios.post(
-      `http://localhost:5000/api/files/upload/${selectedSubjectId}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await api.post(`/api/files/upload/${selectedSubjectId}`, formData);
 
     setRecentFiles((prev) => [res.data.file, ...prev]);
 

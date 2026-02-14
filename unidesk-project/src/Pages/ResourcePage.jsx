@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../services/api";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MdDelete, MdAdd } from "react-icons/md";
@@ -42,18 +42,12 @@ export function ResourcePage() {
   useEffect(() => {
     async function fetchCounts() {
       try {
-        const token = localStorage.getItem("token");
-
+  
         const countsObj = {};
 
         await Promise.all(
           subjects.map(async (sub) => {
-            const res = await axios.get(
-              `${import.meta.env.VITE_API_URL}/api/files/count/${sub._id}`,
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              },
-            );
+            const res = await api.get(`/api/files/count/${sub._id}`);
 
             countsObj[sub._id] = res.data.count;
           }),
@@ -87,19 +81,11 @@ export function ResourcePage() {
   });
 
   async function handleCreateSubject() {
-    // if (!newSubject.subjectName.trim() || !newSubject.subjectCode.trim()) {
-    //   toast.error("Please fill all fields");
-    //   return;
-    // }
 
     try {
-      const token = localStorage.getItem("token");
+     
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/subjects`,
-        newSubject,
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      const res = await api.get("/api/subjects");
 
       setShowModal(false);
 
@@ -223,12 +209,9 @@ export function ResourcePage() {
                       return;
 
                     try {
-                      const token = localStorage.getItem("token");
+                
 
-                      await axios.delete(
-                        `http://localhost:5000/api/subjects/${subject._id}`,
-                        { headers: { Authorization: `Bearer ${token}` } },
-                      );
+                      await api.delete(`/api/subjects/${subject._id}`)
 
                       setSubjects((prev) =>
                         prev.filter((s) => s._id !== subject._id),
