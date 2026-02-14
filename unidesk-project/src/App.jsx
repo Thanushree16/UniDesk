@@ -5,7 +5,7 @@ import { RegisterPage } from "./Pages/RegisterPage";
 import { Home } from "./Pages/Home";
 import { Dashboard } from "./Pages/Dashboard";
 import { ResourcePage } from "./Pages/ResourcePage";
-import { AiPage } from "./Pages/Aipage";
+import { AiPage } from "./Pages/AiPage";
 import { UploadPage } from "./Pages/UploadPage";
 import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
 import { ProfilePage } from "./Pages/ProfilePage";
