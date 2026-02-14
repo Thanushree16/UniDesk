@@ -2,10 +2,13 @@ import "./LoginPage.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TfiControlBackward } from "react-icons/tfi";
+import { useSubjects } from "../context/SubjectsContext";
 import api from "../services/api";
 import toast from "react-hot-toast";
 
 export function LoginPage() {
+  const { refreshSubjects } = useSubjects();
+  
   const navigate = useNavigate();
 
   const [rollNumber, setRollNumber] = useState("");
@@ -25,6 +28,8 @@ export function LoginPage() {
       });
 
       localStorage.setItem("token", data.token);
+
+       await refreshSubjects();
 
       toast.success("Login Successful !");
       navigate("/resources");

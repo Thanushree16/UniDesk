@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TfiControlBackward } from "react-icons/tfi";
+import { useSubjects } from "../context/SubjectsContext";
 import api from "../services/api";
 import "./RegisterPage.css";
 import toast from "react-hot-toast";
 
 export function RegisterPage() {
+  const { refreshSubjects } = useSubjects();
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -32,6 +35,9 @@ export function RegisterPage() {
         rollNumber,
         password,
       });
+
+       await refreshSubjects();
+
 
       toast.success("Registered successfully");
       navigate("/login");
