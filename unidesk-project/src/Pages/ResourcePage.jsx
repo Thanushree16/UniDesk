@@ -24,7 +24,7 @@ export function ResourcePage() {
       year: selectedYear,
       semester: selectedSemester,
     });
-  }, [selectedYear, selectedSemester]);
+  }, [selectedYear, selectedSemester, setSearchParams]);
 
   const navigate = useNavigate();
   const [fileCounts, setCounts] = useState({});
@@ -36,19 +36,16 @@ export function ResourcePage() {
     4: [7, 8],
   };
 
-
   const { subjects, setSubjects } = useSubjects();
 
   useEffect(() => {
     async function fetchCounts() {
       try {
-  
         const countsObj = {};
 
         await Promise.all(
           subjects.map(async (sub) => {
             const res = await api.get(`/api/files/count/${sub._id}`);
-
             countsObj[sub._id] = res.data.count;
           }),
         );
@@ -64,7 +61,8 @@ export function ResourcePage() {
 
   const filteredSubjects = subjects.filter(
     (subject) =>
-      subject.year === selectedYear && subject.semester === selectedSemester,
+      Number(subject.year) === Number(selectedYear) && 
+      Number(subject.semester) === Number(selectedSemester),
   );
 
   useEffect(() => {
@@ -76,25 +74,37 @@ export function ResourcePage() {
   const [newSubject, setNewSubject] = useState({
     subjectName: "",
     subjectCode: "",
-    year: 4,
-    semester: 7,
+    year: 1,
+    semester: 1,
   });
 
   async function handleCreateSubject() {
-
     try {
-     
-
+      // POST the new subject data to create it
       const res = await api.post("/api/subjects", newSubject);
 
       setShowModal(false);
 
-      // instantly add to UI
-      setSubjects((prev) => [...prev, res.data]);
+      // Format the new subject the same way SubjectsContext does
+      const formattedSubject = {
+        ...res.data,
+        id: res.data._id,
+      };
+
+      // Add the newly created subject to UI
+      setSubjects((prev) => [...prev, formattedSubject]);
+
+      // Reset the form
+      setNewSubject({
+        subjectName: "",
+        subjectCode: "",
+        year: 1,
+        semester: 1,
+      });
 
       toast.success("Subject created");
     } catch (err) {
-      console.error("Create subject error:",err?.response?.data || err.message);
+      console.error("Create subject error:", err?.response?.data || err.message);
       toast.error("Creation failed");
     }
   }
@@ -209,9 +219,7 @@ export function ResourcePage() {
                       return;
 
                     try {
-                
-
-                      await api.delete(`/api/subjects/${subject._id}`)
+                      await api.delete(`/api/subjects/${subject._id}`);
 
                       setSubjects((prev) =>
                         prev.filter((s) => s._id !== subject._id),
