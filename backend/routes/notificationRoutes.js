@@ -14,7 +14,6 @@ router.get("/", protect, async (req, res) => {
 });
 
 
-// GET unread count
 router.get("/unread-count", protect, async (req, res) => {
   const count = await Notification.countDocuments({
     user: req.user.id,
@@ -32,10 +31,16 @@ router.put("/:id/read", protect, async (req, res) => {
 });
 
 
-// mark all as read
 router.put("/read-all", protect, async (req, res) => {
   await Notification.updateMany({ user: req.user.id }, { isRead: true });
   res.json({ message: "All marked as read" });
 });
+
+
+router.delete("/clear-all", protect, async (req, res) => {
+  await Notification.deleteMany({ user: req.user.id });
+  res.json({ message: "All notifications cleared" });
+});
+
 
 export default router;

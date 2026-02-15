@@ -12,10 +12,7 @@ export function Topbar() {
   useEffect(() => {
     async function fetchCount() {
       try {
-
-
         const res = await api.get("/api/notifications/unread-count");
-
         setCount(res.data.count);
       } catch (err) {
         console.error(err);
