@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
-import "./NotificationsPage.css";
+import "./NotificationPage.css";
 
 export function NotificationsPage() {
   const [notifications, setNotifications] = useState([]);
