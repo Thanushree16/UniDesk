@@ -85,7 +85,7 @@ export function ResourcePage() {
     try {
      
 
-      const res = await api.get("/api/subjects");
+      const res = await api.post("/api/subjects", newSubject);
 
       setShowModal(false);
 
