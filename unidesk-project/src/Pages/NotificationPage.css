@@ -1,10 +1,10 @@
-/* ===== Notifications Page ===== */
 
 .notifications-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  margin-top: 10px;
 }
 
 .notifications-header h2 {
