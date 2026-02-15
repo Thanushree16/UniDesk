@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // CREATE subject
-router.post("/",  async (req, res) => {
+router.post("/", protect, async (req, res) => {
   try {
     const { subjectName, subjectCode, year, semester } = req.body;
 
