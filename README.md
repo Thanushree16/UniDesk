@@ -1,6 +1,6 @@
 # UniDesk
 
-UniDesk is a full-stack student resource management web application.
+UniDesk is a production-ready full-stack MERN application for managing student academic resources with authentication and file handling features.
 
 ## Features
 - User authentication (login & register)
