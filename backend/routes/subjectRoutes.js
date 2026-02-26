@@ -8,8 +8,19 @@ const router = express.Router();
 
 // GET all subjects
 router.get("/", async (req, res) => {
-  const subjects = await Subject.find();
-  res.json(subjects);
+  try {
+    const { branch, year, semester } = req.query;
+    const filter = {};
+
+    if (branch) filter.branch = branch;
+    if (year) filter.year = Number(year);
+    if (semester) filter.semester = Number(semester);
+
+    const subjects = await Subject.find(filter);
+    res.status(200).json(subjects);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // GET single subject

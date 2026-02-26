@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
+import { IoIosArrowBack } from "react-icons/io";
 import "./NotificationPage.css";
 
 export function NotificationsPage() {
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ export function NotificationsPage() {
     try {
       await api.put(`/api/notifications/${id}/read`);
       setNotifications((prev) =>
-        prev.map((n) => (n._id === id ? { ...n, isRead: true } : n))
+        prev.map((n) => (n._id === id ? { ...n, isRead: true } : n)),
       );
     } catch (err) {
       console.error(err);
@@ -32,15 +35,13 @@ export function NotificationsPage() {
   }
 
   async function markAllRead() {
-  try {
-    await api.put("/api/notifications/read-all"); 
-    setNotifications((prev) =>
-      prev.map((n) => ({ ...n, isRead: true }))
-    );
-  } catch (err) {
-    console.error(err);
+    try {
+      await api.put("/api/notifications/read-all");
+      setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+    } catch (err) {
+      console.error(err);
+    }
   }
-}
   async function clearAll() {
     try {
       await api.delete("/api/notifications/clear-all");
@@ -58,11 +59,19 @@ export function NotificationsPage() {
       <main className="main">
         <Topbar />
 
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          <IoIosArrowBack size={20} />
+          <span>Back</span>
+        </button>
+
         <div className="notifications-header">
           <h2>Notifications</h2>
           <div className="notification-actions">
             {unreadCount > 0 && (
-              <button className="action-btn mark-read-btn" onClick={markAllRead}>
+              <button
+                className="action-btn mark-read-btn"
+                onClick={markAllRead}
+              >
                 Mark all as read
               </button>
             )}

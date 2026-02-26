@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { LeftPanel } from "../components/LeftPanel";
-import { BiArrowBack, BiSend } from "react-icons/bi";
+import { BiSend } from "react-icons/bi";
+import { Topbar } from "../components/Topbar";
 
 import "./AiPage.css";
 
@@ -16,12 +17,10 @@ export function AiPage() {
       <main className="ai-main">
         {/* Header */}
         <div className="ai-header">
-          <BiArrowBack className="back-icon" />
+          
           <h3>List of questions of Unit -1 BDA from the question bank</h3>
-          <div className="ai-header-icons">
-            <div className="bell-dot"></div>
-            <div className="profile-circle"></div>
-          </div>
+          <Topbar />
+         
         </div>
 
         {/* Chat Body */}

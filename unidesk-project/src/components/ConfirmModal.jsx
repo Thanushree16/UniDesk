@@ -1,5 +1,6 @@
 import "./ConfirmModal.css";
 
+// eslint-disable-next-line react/prop-types
 export function ConfirmModal({ message, onConfirm, onCancel }) {
   return (
     <div className="confirm-overlay" onClick={onCancel}>

@@ -54,12 +54,10 @@ router.post("/upload/:subjectId", protect, upload.single("file"), async (req, re
   }
 });
 
-
 router.get("/subject/:subjectId", protect, async (req, res) => {
   const files = await File.find({ subject: req.params.subjectId });
   res.json(files);
 });
-
 
 router.get("/count/:subjectId", protect, async (req, res) => {
   const count = await File.countDocuments({ subject: req.params.subjectId });

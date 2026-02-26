@@ -116,3 +116,17 @@
 .robot-image:hover {
   transform: scale(1.05) rotate(2deg);
 }
+
+/* ===== Mobile only (no desktop changes) ===== */
+
+@media (max-width: 600px) {
+  .card-content {
+    flex-direction: column;
+  }
+
+  .card-right {
+    width: 100%;
+    min-height: 260px;
+    border-radius: 0 0 20px 20px;
+  }
+}

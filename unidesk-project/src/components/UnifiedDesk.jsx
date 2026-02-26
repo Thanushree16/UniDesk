@@ -4,7 +4,7 @@ import './UnifiedDesk.css';
 export function UnifiedDesk(){
   return (
     <section className="unified-desk-section" id="who">
-      <h2>A Unified Desk for everyone</h2>
+      <h2>A Unified Desk for every student</h2>
       <p>
         Designed for students, UniDesk helps you organize, manage, and access all your academic resources in one place.
       </p>
