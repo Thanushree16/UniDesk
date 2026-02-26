@@ -7,9 +7,11 @@ import { Footer } from "../components/Footer";
 import { useEffect } from "react";
 
 export function Home() {
+  
   useEffect(() => {
     document.title = "UniDesk";
   }, []);
+
   return (
     <>
       <NavBar />

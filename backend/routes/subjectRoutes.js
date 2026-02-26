@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     if (year) filter.year = Number(year);
     if (semester) filter.semester = Number(semester);
 
-    const subjects = await Subject.find(filter);
+    const subjects = await Subject.find(filter).sort({ createdAt: -1 });
     res.status(200).json(subjects);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -41,11 +41,13 @@ router.get("/:id", async (req, res) => {
 // CREATE subject
 router.post("/", protect, async (req, res) => {
   try {
-    const { subjectName, subjectCode, year, semester } = req.body;
+    console.log("REQ BODY:", req.body);
+    const { subjectName, subjectCode, branch, year, semester } = req.body;
 
     const subject = await Subject.create({
       subjectName,
       subjectCode,
+      branch,
       year,
       semester,
     });
@@ -85,7 +87,6 @@ router.delete("/:id", protect, async (req, res) => {
 
     await subject.deleteOne();
 
-    
     await Notification.create({
       user: req.user.id,
       message: `Subject deleted: ${subject.subjectName}`,

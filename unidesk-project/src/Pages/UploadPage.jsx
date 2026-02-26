@@ -7,63 +7,112 @@ import toast from "react-hot-toast";
 import "./UploadPage.css";
 
 export function UploadPage() {
+  const branches = ["CSE", "IT", "CSE-DS", "AI", "AI-ML", "ECE", "MECH", "EEE"];
+
+  const yearSemesterMap = {
+    1: [1, 2],
+    2: [3, 4],
+    3: [5, 6],
+    4: [7, 8],
+  };
+
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedSubjectId, setSelectedSubjectId] = useState("");
+  const [branch, setBranch] = useState(branches[0]);
+  const [year, setYear] = useState(4);
+  const [semester, setSemester] = useState(7);
   const [subjects, setSubjects] = useState([]);
-  const [recentFiles, setRecentFiles] = useState([]);
+  const [selectedSubjectId, setSelectedSubjectId] = useState("");
 
   useEffect(() => {
     document.title = "Upload Files | UniDesk";
-
-    api.get("/api/subjects")
-      .then((res) => setSubjects(res.data))
-      .catch((err) => console.error(err));
   }, []);
+
+  
+  useEffect(() => {
+    async function fetchSubjects() {
+      try {
+        const res = await api.get(
+          `/api/subjects?branch=${branch}&year=${year}&semester=${semester}`
+        );
+        console.log("Fetched subjects:", res.data);
+        setSubjects(res.data);
+        setSelectedSubjectId("");
+      } catch (err) {
+        console.error("Error fetching subjects:", err);
+      }
+    }
+
+    fetchSubjects();
+  }, [branch, year, semester]);
 
   function handleFileChange(e) {
     setSelectedFile(e.target.files[0]);
   }
 
   async function handleUpload() {
-  if (!selectedFile || !selectedSubjectId) return;
+    if (!selectedFile || !selectedSubjectId) {
+      toast.error("Select subject and file");
+      return;
+    }
 
-  try {
-    const formData = new FormData();
-    formData.append("file", selectedFile);
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
 
-    const res = await api.post(`/api/files/upload/${selectedSubjectId}`, formData);
+      // eslint-disable-next-line no-unused-vars
+      const res = await api.post(
+        `/api/files/upload/${selectedSubjectId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    setRecentFiles((prev) => [res.data.file, ...prev]);
-
-    setSelectedFile(null);
-    setSelectedSubjectId("");
-
-    toast.success("File uploaded successfully");
-  } catch (error) {
-    console.error(error);
-    toast.error("Upload failed");
+      setSelectedFile(null);
+      toast.success("File uploaded successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Upload failed");
+    }
   }
-}
-
 
   return (
     <div className="dashboard-layout">
       <LeftPanel />
-
       <main className="main">
         <Topbar />
 
         <h2 className="page-title">Upload Your Files</h2>
 
-        <div className="upload-dropzone">
-          <LuUpload />
-          <p>Drag & Drop or</p>
-          <label className="choose-text">
-            Choose file
-            <input type="file" hidden onChange={handleFileChange} />
-          </label>
+        <div className="upload-filters">
+          <select value={branch} onChange={(e) => setBranch(e.target.value)}>
+            {branches.map((b) => (
+              <option key={b}>{b}</option>
+            ))}
+          </select>
+
+          <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
+            <option value={1}>1st Year</option>
+            <option value={2}>2nd Year</option>
+            <option value={3}>3rd Year</option>
+            <option value={4}>4th Year</option>
+          </select>
+
+          <select
+            value={semester}
+            onChange={(e) => setSemester(Number(e.target.value))}
+          >
+            {yearSemesterMap[year].map((sem) => (
+              <option key={sem} value={sem}>
+                Semester {sem}
+              </option>
+            ))}
+          </select>
         </div>
 
+        
         <div className="subject-select">
           <label>Select Subject</label>
           <select
@@ -79,6 +128,23 @@ export function UploadPage() {
           </select>
         </div>
 
+
+
+        <div className="upload-dropzone">
+          <div className="dropzone-inner">
+            <LuUpload className="dropzone-icon" />
+            <p className="dropzone-text">Drag & drop your file here</p>
+            <span className="dropzone-or">or</span>
+            <label className="dropzone-label">
+              Browse File
+              <input type="file" hidden onChange={handleFileChange} />
+            </label>
+            {selectedFile && (
+              <p className="dropzone-selected">📄 {selectedFile.name}</p>
+            )}
+          </div>
+        </div>
+
         <button
           className="upload-btn"
           disabled={!selectedFile || !selectedSubjectId}
@@ -86,24 +152,6 @@ export function UploadPage() {
         >
           Upload
         </button>
-
-        {recentFiles.length > 0 && (
-          <>
-            <h3 className="recent-title">Uploaded Files</h3>
-
-            <div className="recent-files">
-              {recentFiles.map((file) => (
-                <div className="recent-file-card" key={file._id}>
-                  
-                  <div className="file-details">
-                    <h4>{file.fileName}</h4>
-                    <p>{file.fileSize}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
       </main>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiGridAlt, BiFolder, BiBot, BiMenu, BiLogOut } from "react-icons/bi";
 import { useNavigate, useLocation } from "react-router-dom";
+import { LuUpload } from "react-icons/lu";
 import "./LeftPanel.css";
 
 export function LeftPanel() {
@@ -10,7 +11,7 @@ export function LeftPanel() {
 
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
-      {/* Top section */}
+      
       <div className="top-section">
         {!collapsed && (
           <div className="logo">
@@ -25,12 +26,10 @@ export function LeftPanel() {
         />
       </div>
 
-      {/* Menu */}
+      
       <nav className="menu">
         <button
-          className={`menu-item ${
-            location.pathname === "/dashboard" ? "active" : ""
-          }`}
+          className={`menu-item ${location.pathname === "/dashboard" ? "active" : ""}`}
           onClick={() => navigate("/dashboard")}
         >
           <BiGridAlt />
@@ -38,9 +37,7 @@ export function LeftPanel() {
         </button>
 
         <button
-          className={`menu-item ${
-            location.pathname === "/resources" ? "active" : ""
-          }`}
+          className={`menu-item ${location.pathname === "/resources" ? "active" : ""}`}
           onClick={() => navigate("/resources")}
         >
           <BiFolder />
@@ -48,25 +45,24 @@ export function LeftPanel() {
         </button>
 
         <button
-          className={`menu-item ${
-            location.pathname === "/assistant" ? "active" : ""
-          }`}
+          className={`menu-item ${location.pathname === "/assistant" ? "active" : ""}`}
           onClick={() => navigate("/assistant")}
         >
           <BiBot />
           {!collapsed && <span>AI Assistant</span>}
         </button>
+
+        <button
+          className={`menu-item ${location.pathname === "/upload" ? "active" : ""}`}
+          onClick={() => navigate("/upload")}
+        >
+          <LuUpload style={{ fontSize: "19px", width: "19px", height: "19px" }} />
+          {!collapsed && <span>Upload Files</span>}
+        </button>
       </nav>
 
-      {/* Upload */}
-      {!collapsed && (
-        <button className="upload-btn" onClick={() => navigate("/upload")}>
-          Upload files
-        </button>
-      )}
-
-      {/* Logout */}
-      <div className="logout" onClick={() => navigate("/logout")} >
+     
+      <div className="logout" onClick={() => navigate("/logout")}>
         <BiLogOut />
         {!collapsed && <span>Logout</span>}
       </div>

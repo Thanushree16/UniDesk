@@ -15,7 +15,7 @@
 
 .search-box input {
   width: 100%;
-  padding: 12px 14px 12px 42px; /* space for icon */
+  padding: 12px 14px 12px 42px;
   border-radius: 10px;
   border: none;
   background: #0b1e3d;
@@ -23,7 +23,6 @@
   outline: none;
 }
 
-/* Search icon inside input */
 .search-icon {
   position: absolute;
   top: 50%;
@@ -31,22 +30,20 @@
   transform: translateY(-50%);
   color: rgba(255, 255, 255, 0.6);
   font-size: 18px;
-  pointer-events: none; /* allows clicking input */
+  pointer-events: none;
 }
-
 
 /* ===== Topbar Icons ===== */
 
 .top-icons {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 10px;
 }
 
-/* Common icon style */
 .notification-bell,
 .profile-icon {
-  width: 42px;
+  width: 45px;
   height: 42px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 50%;
@@ -56,28 +53,23 @@
   cursor: pointer;
   color: #ffffff;
   font-size: 20px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-/* Hover effect */
 .notification-bell:hover,
 .profile-icon:hover {
   background: rgba(255, 255, 255, 0.18);
-  transform: translateY(-1px);
 }
 
-/* Notification bell positioning */
 .notification-bell {
   position: relative;
   transform: translateY(5px);
 }
 
-/* Profile icon size */
 .profile-icon {
   font-size: 22px;
 }
 
-/* Notification badge */
 .notif-badge {
   position: absolute;
   top: 6px;
@@ -91,4 +83,73 @@
   min-width: 18px;
   text-align: center;
   border: 2px solid #050b18;
+}
+
+/* ===== Tablet (768px and below) ===== */
+
+@media (max-width: 768px) {
+  .search-box {
+    width: 55%;
+  }
+
+  .search-box input {
+    padding: 10px 12px 10px 38px;
+    font-size: 0.9rem;
+  }
+
+  .notification-bell,
+  .profile-icon {
+    width: 45px;
+    height: 40px;
+    font-size: 17px;
+  }
+
+  .profile-icon {
+    font-size: 19px;
+  }
+
+  .top-icons {
+    gap: 8px;
+  }
+}
+
+/* ===== Mobile (480px and below) ===== */
+
+@media (max-width: 480px) {
+  .search-box {
+    width: 50%;
+  }
+
+  .search-box input {
+    padding: 8px 10px 8px 34px;
+    font-size: 0.82rem;
+  }
+
+  .search-icon {
+    font-size: 15px;
+    left: 10px;
+  }
+
+  .notification-bell,
+  .profile-icon {
+    width: 42px;
+    height: 40px;
+    font-size: 17px;
+  }
+
+  .profile-icon {
+    font-size: 20px;
+  }
+
+  .top-icons {
+    gap: 6px;
+  }
+
+ .notif-badge {
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    padding: 2px 5px;
+    min-width: 16px;
+ }
 }

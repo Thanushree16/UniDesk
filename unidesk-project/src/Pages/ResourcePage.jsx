@@ -10,24 +10,21 @@ import toast from "react-hot-toast";
 import "./ResourcePage.css";
 
 export function ResourcePage() {
-  
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const branches = ["CSE", "IT", "CSE-DS", "AI", "AI-ML", "ECE", "MECH", "EEE"];
 
   const initialYear = Number(searchParams.get("year")) || 4;
   const initialSem = Number(searchParams.get("semester")) || 7;
 
+  const [branch, setBranch] = useState(branches[0]);
   const [selectedYear, setSelectedYear] = useState(initialYear);
   const [selectedSemester, setSelectedSemester] = useState(initialSem);
-
-  useEffect(() => {
-    setSearchParams({
-      year: selectedYear,
-      semester: selectedSemester,
-    });
-  }, [selectedYear, selectedSemester, setSearchParams]);
-
-  const navigate = useNavigate();
   const [fileCounts, setCounts] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  const { subjects, setSubjects } = useSubjects();
 
   const yearSemesterMap = {
     1: [1, 2],
@@ -36,8 +33,36 @@ export function ResourcePage() {
     4: [7, 8],
   };
 
-  const { subjects, setSubjects } = useSubjects();
+  useEffect(() => {
+    setSearchParams({
+      year: selectedYear,
+      semester: selectedSemester,
+    });
+  }, [selectedYear, selectedSemester, setSearchParams]);
 
+  useEffect(() => {
+    document.title = "Resources | UniDesk";
+  }, []);
+
+ 
+  useEffect(() => {
+    async function fetchFilteredSubjects() {
+      try {
+        const res = await api.get(
+          `/api/subjects?branch=${branch}&year=${selectedYear}&semester=${selectedSemester}`,
+        );
+        setSubjects(res.data);
+      } catch (err) {
+        console.error("Error fetching subjects:", err);
+      }
+    }
+
+    if (branch && selectedYear && selectedSemester) {
+      fetchFilteredSubjects();
+    }
+  }, [branch, selectedYear, selectedSemester, setSubjects]);
+
+  
   useEffect(() => {
     async function fetchCounts() {
       try {
@@ -59,52 +84,41 @@ export function ResourcePage() {
     if (subjects.length) fetchCounts();
   }, [subjects]);
 
-  const filteredSubjects = subjects.filter(
-    (subject) =>
-      Number(subject.year) === Number(selectedYear) && 
-      Number(subject.semester) === Number(selectedSemester),
-  );
-
-  useEffect(() => {
-    document.title = "Resources | UniDesk";
-  }, []);
-
-  const [showModal, setShowModal] = useState(false);
-
   const [newSubject, setNewSubject] = useState({
     subjectName: "",
     subjectCode: "",
+    branch: branches[0],
     year: 1,
     semester: 1,
   });
 
   async function handleCreateSubject() {
     try {
-      // POST the new subject data to create it
       const res = await api.post("/api/subjects", newSubject);
 
       setShowModal(false);
 
-      // Format the new subject the same way SubjectsContext does
       const formattedSubject = {
         ...res.data,
         id: res.data._id,
       };
 
-      // Add the newly created subject to UI
       setSubjects((prev) => [...prev, formattedSubject]);
 
-      // Reset the form
       setNewSubject({
         subjectName: "",
         subjectCode: "",
+        branch: branches[0],
         year: 1,
         semester: 1,
       });
 
       toast.success("Subject created");
     } catch (err) {
-      console.error("Create subject error:", err?.response?.data || err.message);
+      console.error(
+        "Create subject error:",
+        err?.response?.data || err.message,
+      );
       toast.error("Creation failed");
     }
   }
@@ -112,7 +126,6 @@ export function ResourcePage() {
   return (
     <div className="dashboard-layout">
       <LeftPanel />
-
       <main className="main">
         <Topbar />
 
@@ -132,7 +145,23 @@ export function ResourcePage() {
           </button>
         </div>
 
+        
         <div className="filter-bar">
+          <div className="filter-group">
+            <label>Branch</label>
+            <select
+              value={branch}
+              onChange={(e) => setBranch(e.target.value)}
+              className="filter-select"
+            >
+              {branches.map((b) => (
+                <option key={b} value={b}>
+                  {b}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="filter-group">
             <label>Year</label>
             <select
@@ -163,9 +192,9 @@ export function ResourcePage() {
           </div>
         </div>
 
-        {filteredSubjects.length > 0 ? (
+        {subjects.length > 0 ? (
           <div className="subjects-list">
-            {filteredSubjects.map((subject) => (
+            {subjects.map((subject) => (
               <div className="subject-card" key={subject._id}>
                 <div
                   className="subject-content"
@@ -181,27 +210,6 @@ export function ResourcePage() {
                   </div>
                   <div className="subject-footer">
                     <span className="file-count">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <polyline
-                          points="13 2 13 9 20 9"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
                       {fileCounts[subject._id] || 0}{" "}
                       {fileCounts[subject._id] === 1 ? "File" : "Files"}
                     </span>
@@ -220,11 +228,9 @@ export function ResourcePage() {
 
                     try {
                       await api.delete(`/api/subjects/${subject._id}`);
-
                       setSubjects((prev) =>
                         prev.filter((s) => s._id !== subject._id),
                       );
-
                       toast.success("Subject deleted");
                     } catch (err) {
                       console.error(err);
@@ -265,7 +271,6 @@ export function ResourcePage() {
                   <label>Subject Name</label>
                   <input
                     type="text"
-                    placeholder="e.g., Data Structures"
                     value={newSubject.subjectName}
                     onChange={(e) =>
                       setNewSubject({
@@ -280,7 +285,6 @@ export function ResourcePage() {
                   <label>Subject Code</label>
                   <input
                     type="text"
-                    placeholder="e.g., DS"
                     value={newSubject.subjectCode}
                     onChange={(e) =>
                       setNewSubject({
@@ -292,40 +296,52 @@ export function ResourcePage() {
                 </div>
 
                 <div className="form-row">
-                  <div className="form-group">
-                    <select
-                      value={newSubject.year}
-                      onChange={(e) =>
-                        setNewSubject({
-                          ...newSubject,
-                          year: Number(e.target.value),
-                        })
-                      }
-                    >
-                      <option value={1}>1st Year</option>
-                      <option value={2}>2nd Year</option>
-                      <option value={3}>3rd Year</option>
-                      <option value={4}>4th Year</option>
-                    </select>
-                  </div>
+                  <select
+                    value={newSubject.branch}
+                    onChange={(e) =>
+                      setNewSubject({
+                        ...newSubject,
+                        branch: e.target.value,
+                      })
+                    }
+                  >
+                    {branches.map((b) => (
+                      <option key={b} value={b}>
+                        {b}
+                      </option>
+                    ))}
+                  </select>
 
-                  <div className="form-group">
-                    <select
-                      value={newSubject.semester}
-                      onChange={(e) =>
-                        setNewSubject({
-                          ...newSubject,
-                          semester: Number(e.target.value),
-                        })
-                      }
-                    >
-                      {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
-                        <option key={sem} value={sem}>
-                          Semester {sem}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <select
+                    value={newSubject.year}
+                    onChange={(e) =>
+                      setNewSubject({
+                        ...newSubject,
+                        year: Number(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={1}>1st Year</option>
+                    <option value={2}>2nd Year</option>
+                    <option value={3}>3rd Year</option>
+                    <option value={4}>4th Year</option>
+                  </select>
+
+                  <select
+                    value={newSubject.semester}
+                    onChange={(e) =>
+                      setNewSubject({
+                        ...newSubject,
+                        semester: Number(e.target.value),
+                      })
+                    }
+                  >
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
+                      <option key={sem} value={sem}>
+                        Semester {sem}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
