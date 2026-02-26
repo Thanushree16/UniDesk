@@ -3,8 +3,8 @@ import "./Hero.css";
 
 const FULL_TEXT = "Studying has become simpler.";
 const YELLOW_WORD = "simpler.";
-const TYPING_SPEED = 60;    // ms per character
-const REPEAT_DELAY = 5000;  // ms before restarting
+const TYPING_SPEED = 60;
+const REPEAT_DELAY = 5000;
 
 export function Hero() {
   const [displayed, setDisplayed] = useState("");
@@ -19,7 +19,6 @@ export function Hero() {
         index++;
         timeout = setTimeout(type, TYPING_SPEED);
       } else {
-        // wait then restart
         timeout = setTimeout(() => {
           index = 0;
           type();
@@ -31,7 +30,6 @@ export function Hero() {
     return () => clearTimeout(timeout);
   }, []);
 
-  // split into normal + yellow part
   const yellowStart = FULL_TEXT.indexOf(YELLOW_WORD);
   const beforeYellow = displayed.slice(0, yellowStart);
   const yellowPart = displayed.slice(yellowStart);
@@ -39,8 +37,10 @@ export function Hero() {
   return (
     <section className="hero">
       <h1>
+        <span className="hero-brand">UniDesk</span>
+        <br />
         {beforeYellow}
-        {yellowPart && <span>{yellowPart}</span>}
+        {yellowPart && <span className="hero-yellow">{yellowPart}</span>}
         <span className="cursor">|</span>
       </h1>
     </section>
