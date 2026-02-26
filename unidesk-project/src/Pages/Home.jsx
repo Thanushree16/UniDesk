@@ -4,8 +4,12 @@ import { About } from "../components/About";
 import { UnifiedDesk } from "../components/UnifiedDesk";
 import { HowItWorks } from "../components/HowItWorks";
 import { Footer } from "../components/Footer";
+import { useEffect } from "react";
 
 export function Home() {
+  useEffect(() => {
+    document.title = "UniDesk";
+  }, []);
   return (
     <>
       <NavBar />
