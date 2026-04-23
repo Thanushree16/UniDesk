@@ -17,7 +17,7 @@
   word-break: break-word;
 }
 
-/* UniDesk branding line */
+
 .hero-brand {
   display: block;
   background: linear-gradient(135deg, #ffffff, #a0a9ff);
@@ -27,7 +27,7 @@
   margin-bottom: 0.15em;
 }
 
-/* yellow "simpler." */
+
 .hero-yellow {
   background: linear-gradient(135deg, #ffd700, #ffeb3b);
   -webkit-background-clip: text;
@@ -35,7 +35,6 @@
   background-clip: text;
 }
 
-/* blinking cursor */
 .cursor {
   background: none !important;
   -webkit-text-fill-color: #fff !important;
@@ -49,7 +48,7 @@
   50%       { opacity: 0; }
 }
 
-/* ===== Mobile ===== */
+
 
 @media (max-width: 600px) {
   .hero h1 {

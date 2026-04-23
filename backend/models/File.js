@@ -1,13 +1,15 @@
-
 import mongoose from "mongoose";
 
 const fileSchema = new mongoose.Schema(
   {
     fileName: { type: String, required: true },
-    fileUrl: { type: String, required: true }, 
-    publicId: { type: String }, 
+    fileUrl: { type: String, required: true },
+    publicId: { type: String },
     fileType: { type: String },
     fileSize: { type: String },
+
+    summary: { type: String, default: "" },
+
     subject: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Subject",
@@ -17,4 +19,6 @@ const fileSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("File", fileSchema);
+const File = mongoose.model("File", fileSchema);
+
+export default File;

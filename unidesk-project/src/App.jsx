@@ -12,12 +12,33 @@ import { ProfilePage } from "./Pages/ProfilePage";
 import { NotificationsPage } from "./Pages/NotificationPage";
 import { Logout } from "./components/Logout";
 import { ProtectedRoute } from "./components/protectedRoute";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import api from"./services/api";
 import { Toaster } from "react-hot-toast";
 
 import "./App.css";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function checkAuth() {
+      const token = localStorage.getItem("token");
+
+      if (!token) return;
+
+      try {
+        await api.get("/api/auth/me");
+        navigate("/dashboard");
+      } catch (err) {
+        localStorage.removeItem("token");
+      }
+    }
+
+    checkAuth();
+  }, []);
+
   return (
     <>
       <Toaster position="top-right" />
@@ -32,7 +53,6 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/logout" element={<Logout />} />
-
 
         <Route
           path="/dashboard"

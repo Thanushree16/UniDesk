@@ -8,6 +8,7 @@ import fileRoutes from "./routes/fileRoutes.js";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import aiRoutes from "./routes/aiRoutes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/api/subjects", subjectRoutes);
 app.use("/api/files", fileRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.get("/", (req, res) => {
   res.send("UniDesk API running");

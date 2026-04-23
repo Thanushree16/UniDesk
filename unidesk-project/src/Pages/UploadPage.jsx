@@ -22,23 +22,23 @@ export function UploadPage() {
   const [semester, setSemester] = useState(7);
   const [subjects, setSubjects] = useState([]);
   const [selectedSubjectId, setSelectedSubjectId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     document.title = "Upload Files | UniDesk";
   }, []);
 
-  
   useEffect(() => {
     async function fetchSubjects() {
       try {
         const res = await api.get(
           `/api/subjects?branch=${branch}&year=${year}&semester=${semester}`
         );
-        console.log("Fetched subjects:", res.data);
+
         setSubjects(res.data);
         setSelectedSubjectId("");
-      } catch (err) {
-        console.error("Error fetching subjects:", err);
+      } catch (error) {
+        console.error(error);
       }
     }
 
@@ -56,36 +56,38 @@ export function UploadPage() {
     }
 
     try {
+      setLoading(true);
+
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      // eslint-disable-next-line no-unused-vars
-      const res = await api.post(
-        `/api/files/upload/${selectedSubjectId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await api.post(`/api/files/upload/${selectedSubjectId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setSelectedFile(null);
+
       toast.success("File uploaded successfully");
     } catch (error) {
       console.error(error);
       toast.error("Upload failed");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <div className="dashboard-layout">
       <LeftPanel />
+
       <main className="main">
         <Topbar />
 
         <h2 className="page-title">Upload Your Files</h2>
 
+        {/* FILTERS */}
         <div className="upload-filters">
           <select value={branch} onChange={(e) => setBranch(e.target.value)}>
             {branches.map((b) => (
@@ -93,7 +95,10 @@ export function UploadPage() {
             ))}
           </select>
 
-          <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
+          <select
+            value={year}
+            onChange={(e) => setYear(Number(e.target.value))}
+          >
             <option value={1}>1st Year</option>
             <option value={2}>2nd Year</option>
             <option value={3}>3rd Year</option>
@@ -112,14 +117,16 @@ export function UploadPage() {
           </select>
         </div>
 
-        
+        {/* SUBJECT */}
         <div className="subject-select">
           <label>Select Subject</label>
+
           <select
             value={selectedSubjectId}
             onChange={(e) => setSelectedSubjectId(e.target.value)}
           >
             <option value="">Choose subject</option>
+
             {subjects.map((subject) => (
               <option key={subject._id} value={subject._id}>
                 {subject.subjectName} ({subject.subjectCode})
@@ -128,29 +135,33 @@ export function UploadPage() {
           </select>
         </div>
 
-
-
+        {/* UPLOAD BOX */}
         <div className="upload-dropzone">
           <div className="dropzone-inner">
             <LuUpload className="dropzone-icon" />
+
             <p className="dropzone-text">Drag & drop your file here</p>
+
             <span className="dropzone-or">or</span>
+
             <label className="dropzone-label">
               Browse File
               <input type="file" hidden onChange={handleFileChange} />
             </label>
+
             {selectedFile && (
               <p className="dropzone-selected">📄 {selectedFile.name}</p>
             )}
           </div>
         </div>
 
+        {/* UPLOAD BUTTON */}
         <button
           className="upload-btn"
-          disabled={!selectedFile || !selectedSubjectId}
+          disabled={!selectedFile || !selectedSubjectId || loading}
           onClick={handleUpload}
         >
-          Upload
+          {loading ? "Uploading..." : "Upload"}
         </button>
       </main>
     </div>
