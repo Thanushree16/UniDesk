@@ -11,9 +11,7 @@ export function ProfilePage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-      
         const res = await api.get("/api/auth/me");
-
         setUser(res.data);
       } catch (err) {
         console.error(err);
@@ -40,11 +38,10 @@ export function ProfilePage() {
 
   return (
     <div className="dashboard-layout">
-      <main className="main">
+
+      <main className="profile-main">
         <div className="profile-page-wrapper">
           <h1 className="page-title">User Profile</h1>
-
-         
 
           <div className="profile-card">
             <div className="profile-row">
@@ -61,11 +58,11 @@ export function ProfilePage() {
               Logout
             </button>
           </div>
-           <button className="back-btn" onClick={handleBack}>
+
+          <button className="back-btn" onClick={handleBack}>
             Back
           </button>
         </div>
-        
       </main>
     </div>
   );

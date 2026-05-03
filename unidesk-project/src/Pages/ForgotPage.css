@@ -1,82 +1,235 @@
-/* wrapper to center card */
-.forgot-wrapper {
+/* ===== Auth Page ===== */
+.auth-page {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* card */
-.forgot-password {
-  background: rgba(13, 27, 42, 0.95);
-  border-radius: 22px;
-  padding: 40px 36px;
-  width: 400px;
-  max-width: 95vw;
-  color: #fff;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-}
-
-/* logo */
-.logo {
-  margin-bottom: 16px;
-}
-
-.logo-icon {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-
-/* text */
-h2 {
-  margin-bottom: 10px;
-  font-size: 1.9rem;
-}
-
-p {
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  color: #e0e0e0;
-  margin-top: 10px;
-}
-
-/* form */
-form {
-  display: flex;
   flex-direction: column;
+  background: linear-gradient(180deg, #050b18, #031b3f);
+}
+
+/* ===== Navbar ===== */
+.auth-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.nav-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-back-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-2px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-input {
-  padding: 12px;
+.nav-logo-icon {
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
-  border: none;
-  font-size: 1rem;
 }
 
-button {
-  margin-top: 10px;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  background: #b23a48;
-  color: #fff;
+.nav-logo-text {
+  font-size: 1.3rem;
   font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #a8c0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Container ===== */
+.auth-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===== Forgot Card ===== */
+.forgot-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 48px 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.forgot-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  margin: 0 0 36px 0;
+}
+
+/* ===== Form ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #667eea;
+}
+
+/* ===== Reset Button ===== */
+.reset-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.05rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-button:hover {
-  background: #e63946;
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-label{
-    font-size: 0.95rem;
-    margin-bottom: 4px;
+.reset-btn:active {
+  transform: translateY(0);
 }
 
-a{
-    color: #ecb1b1;
-    text-decoration: underline;
+/* ===== Back to Login ===== */
+.back-login {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.back-login-link {
+  color: #a8c0ff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.back-login-link:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .auth-navbar {
+    padding: 16px 24px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.1rem;
+  }
+
+  .nav-logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-back-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .auth-container {
+    padding: 20px 15px;
+  }
+
+  .forgot-card {
+    padding: 30px 24px;
+  }
+
+  .forgot-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .auth-navbar {
+    padding: 16px 16px;
+  }
+
+  .forgot-card {
+    padding: 24px 20px;
+  }
+
+  .forgot-card h2 {
+    font-size: 1.3rem;
+  }
 }

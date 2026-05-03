@@ -1,18 +1,22 @@
-/* profilepage.css */
-
-/* Specific wrapper for profile page centering */
 .profile-page-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100dvh;
   padding: 40px 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.profile-main {
+  flex: 1;
+  overflow: hidden;
+  height: 100dvh;
 }
 
 .back-btn {
   padding: 10px 24px;
-  margin-bottom: 30px;
+  margin-top: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
@@ -116,23 +120,23 @@
   box-shadow: 0 2px 10px rgba(255, 95, 109, 0.4);
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
   .page-title {
     font-size: 2rem;
   }
-  
+
   .profile-card {
     padding: 30px 24px;
     max-width: 100%;
   }
-  
+
   .profile-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-  
+
   .profile-row strong {
     font-size: 1rem;
   }

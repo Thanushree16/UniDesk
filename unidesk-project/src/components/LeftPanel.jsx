@@ -23,7 +23,6 @@ export function LeftPanel() {
             <span>UniDesk</span>
           </div>
         )}
-
         <BiMenu
           className={`hamburger ${collapsed ? "collapsed-hamburger" : ""}`}
           onClick={() => setCollapsed(!collapsed)}

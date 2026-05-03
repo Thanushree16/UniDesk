@@ -11,6 +11,8 @@
   padding: 25px 40px;
   max-width: 1400px;
   margin: 0 auto;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 /* ===== Header Section ===== */
@@ -213,10 +215,6 @@
   font-weight: 500;
 }
 
-.file-count svg {
-  opacity: 0.7;
-}
-
 /* ===== Delete Button ===== */
 .delete-btn {
   display: flex;
@@ -383,7 +381,7 @@
   color: white;
 }
 
-/* ===== Form Row — 3 equal columns ===== */
+/* ===== Form Row ===== */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -464,6 +462,8 @@
 @media (max-width: 900px) {
   .main {
     padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
   }
 
   .resources-header {
@@ -490,6 +490,10 @@
 }
 
 @media (max-width: 600px) {
+  .main {
+    padding: 15px;
+  }
+
   .page-title {
     font-size: 1.6rem;
   }
