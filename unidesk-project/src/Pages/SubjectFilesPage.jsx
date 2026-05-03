@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import api from "../services/api";  // ✅ Fixed import
+import api from "../services/api";
 import { LeftPanel } from "../components/LeftPanel";
 import { Topbar } from "../components/Topbar";
 import { IoIosArrowBack } from "react-icons/io";
@@ -25,8 +25,8 @@ export function SubjectFilesPage() {
     async function fetchData() {
       try {
         const [filesRes, subjectRes] = await Promise.all([
-          api.get(`/api/files/subject/${subjectId}`),  
-          api.get(`/api/subjects/${subjectId}`),        
+          api.get(`/api/files/subject/${subjectId}`),
+          api.get(`/api/subjects/${subjectId}`),
         ]);
 
         setFiles(filesRes.data);
@@ -48,8 +48,7 @@ export function SubjectFilesPage() {
 
   async function deleteFile(fileId) {
     try {
-      await api.delete(`/api/files/${fileId}`); 
-
+      await api.delete(`/api/files/${fileId}`);
       setFiles((prev) => prev.filter((f) => f._id !== fileId));
       toast.success("File deleted");
     } catch (err) {
@@ -76,7 +75,7 @@ export function SubjectFilesPage() {
         </button>
 
         {subject && (
-          <h2 className="subject-title">
+          <h2 className="page-title">
             {subject.subjectName} ({subject.subjectCode})
           </h2>
         )}
@@ -102,19 +101,21 @@ export function SubjectFilesPage() {
                   <p>{file.fileSize}</p>
                 </div>
 
-                <button
-                  onClick={() => openFile(file.fileUrl)}
-                  className="open-btn"
-                >
-                  Open
-                </button>
+                <div className="file-actions">
+                  <button
+                    onClick={() => openFile(file.fileUrl)}
+                    className="open-btn"
+                  >
+                    Open
+                  </button>
 
-                <button
-                  onClick={() => deleteFile(file._id)}
-                  className="delete-btn"
-                >
-                  <MdDelete size={22} />
-                </button>
+                  <button
+                    onClick={() => deleteFile(file._id)}
+                    className="delete-btn"
+                  >
+                    <MdDelete size={22} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

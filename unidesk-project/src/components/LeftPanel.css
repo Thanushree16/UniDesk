@@ -186,6 +186,7 @@
   }
 
   .logo img {
+    margin-top: 50%;
     width: 26px;
     height: 26px;
   }
@@ -214,6 +215,6 @@
   }
 
   .hamburger {
-    margin-top: 16%;
+    margin-top: 9%;
   }
 }

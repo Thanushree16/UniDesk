@@ -13,6 +13,11 @@
   margin: 0 auto;
 }
 
+/* ===== Topbar Spacing ===== */
+.main .topbar {
+  margin-bottom: 20px;
+}
+
 /* ===== Back Button ===== */
 .back-btn {
   display: inline-flex;
@@ -40,47 +45,11 @@
 .page-title {
   font-size: 2rem;
   font-weight: 700;
-  margin: 0 0 16px 0;
+  margin: 0 0 24px 0;
   background: linear-gradient(135deg, #fff 0%, #a8c0ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-.title-separator {
-  height: 2px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-  margin-bottom: 24px;
-}
-
-/* ===== Subject Info Card ===== */
-.subject-info-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 20px 24px;
-  margin-bottom: 28px;
-  backdrop-filter: blur(10px);
-}
-
-.subject-name {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  color: #ffffff;
-}
-
-.subject-code {
-  display: inline-block;
-  padding: 6px 12px;
-  background: rgba(102, 126, 234, 0.15);
-  border: 1px solid rgba(102, 126, 234, 0.3);
-  border-radius: 8px;
-  color: #a8c0ff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin: 0;
 }
 
 /* ===== Files List ===== */
@@ -162,9 +131,20 @@
   margin: 0;
 }
 
+/* ===== File Actions ===== */
+.file-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 /* ===== Open Button ===== */
 .open-btn {
-  padding: 10px 20px;
+  height: 42px;
+  padding: 0 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   border-radius: 10px;
@@ -174,8 +154,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
-  flex-shrink: 0;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .open-btn:hover {
@@ -185,6 +167,28 @@
 
 .open-btn:active {
   transform: translateY(0);
+}
+
+/* ===== Delete Button ===== */
+.delete-btn {
+  height: 42px;
+  width: 42px;
+  margin-bottom : 10%;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 77, 77, 0.25);
+  transform: translateY(-2px);
 }
 
 /* ===== Empty State ===== */
@@ -215,33 +219,6 @@
   font-size: 0.95rem;
 }
 
-/* ===== File Actions ===== */
-.file-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* ===== Delete Button ===== */
-.delete-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255, 77, 77, 0.15);
-  color: #ff4d4d;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.delete-btn:hover {
-  background: rgba(255, 77, 77, 0.25);
-  transform: translateY(-2px);
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
   .main {
@@ -250,10 +227,6 @@
 
   .page-title {
     font-size: 1.6rem;
-  }
-
-  .subject-name {
-    font-size: 1.3rem;
   }
 
   .file-card {
@@ -268,14 +241,6 @@
 
   .page-title {
     font-size: 1.4rem;
-  }
-
-  .subject-info-card {
-    padding: 16px 18px;
-  }
-
-  .subject-name {
-    font-size: 1.2rem;
   }
 
   .file-card {
@@ -293,9 +258,25 @@
     width: 100%;
   }
 
-  .open-btn {
+  .file-actions {
     width: 100%;
     margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .open-btn {
+    flex: 1;
+    height: 42px;
+  }
+
+  .delete-btn {
+    height: 42px;
+    width: 42px;
+    flex-shrink: 0;
+    margin-bottom: 5%;
   }
 
   .back-btn span {
