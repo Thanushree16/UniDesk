@@ -111,21 +111,17 @@ export function AiPage() {
       <LeftPanel />
 
       <main className="ai-main">
-        <div className="ai-header">
-          <Topbar />
+
+        <div className="ai-topbar-row">
+        <Topbar />
         </div>
 
-        <h2 style={{ color: "white", marginBottom: "18px" }}>AI Assistant</h2>
+        <div className="ai-content">
+
+        <h2 className="ai-title">AI Assistant</h2>
 
         {/* FILTERS */}
-        <div
-          style={{
-            display: "flex",
-            gap: "14px",
-            flexWrap: "wrap",
-            marginBottom: "16px",
-          }}
-        >
+        <div className="ai-filters">
           <select value={branch} onChange={(e) => setBranch(e.target.value)}>
             {branches.map((b) => (
               <option key={b}>{b}</option>
@@ -185,14 +181,7 @@ export function AiPage() {
         </select>
 
         {/* QUICK ACTIONS */}
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            flexWrap: "wrap",
-            marginBottom: "16px",
-          }}
-        >
+        <div className="ai-actions">
           <button onClick={() => setPrompt("Summarize this PDF clearly")}>
             Summarize
           </button>
@@ -270,6 +259,7 @@ export function AiPage() {
             onClick={handleAsk}
             style={{ cursor: "pointer" }}
           />
+        </div>
         </div>
       </main>
     </div>
