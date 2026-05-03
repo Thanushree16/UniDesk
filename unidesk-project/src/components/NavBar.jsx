@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 export function NavBar() {
+  const isLoggedIn = !!localStorage.getItem("token");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,12 +42,20 @@ export function NavBar() {
       </nav>
 
       <div className="nav-buttons">
-        <Link to="/login" className="btn login">
-          Login
-        </Link>
-        <Link to="/register" className="btn register">
-          Register Now
-        </Link>
+        {isLoggedIn ? (
+          <Link to="/dashboard" className="btn register">
+            Go to Dashboard
+          </Link>
+        ) : (
+          <>
+            <Link to="/login" className="btn login">
+              Login
+            </Link>
+            <Link to="/register" className="btn register">
+              Register Now
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );

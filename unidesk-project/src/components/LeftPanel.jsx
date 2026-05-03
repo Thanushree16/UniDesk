@@ -14,7 +14,11 @@ export function LeftPanel() {
       
       <div className="top-section">
         {!collapsed && (
-          <div className="logo">
+          <div
+            className="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          >
             <img src="/assets/images/Logo.png" alt="UniDesk Logo" />
             <span>UniDesk</span>
           </div>
@@ -26,7 +30,6 @@ export function LeftPanel() {
         />
       </div>
 
-      
       <nav className="menu">
         <button
           className={`menu-item ${location.pathname === "/dashboard" ? "active" : ""}`}
@@ -61,7 +64,6 @@ export function LeftPanel() {
         </button>
       </nav>
 
-     
       <div className="logout" onClick={() => navigate("/logout")}>
         <BiLogOut />
         {!collapsed && <span>Logout</span>}
