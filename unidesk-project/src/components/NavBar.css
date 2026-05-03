@@ -6,7 +6,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0rem 2rem;
+  padding: 1.2rem 2rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -66,7 +66,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-top: 1.5rem;
+  padding-top: 0;
 }
 
 .logo img {
@@ -147,14 +147,14 @@
 }
 
 .btn.register {
-  background: linear-gradient(135deg, #4a90e2, #7b2ff7);
+  background: linear-gradient(135deg, #b94639, #e74c3c);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(74, 144, 226, 0.3);
+  box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
 }
 
 .btn.register:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(74, 144, 226, 0.4);
+  box-shadow: 0 8px 30px rgba(231, 76, 60, 0.4);
 }
 
 /* ===== Mobile only (≤600px) ===== */

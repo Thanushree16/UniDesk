@@ -11,6 +11,7 @@ import { SubjectFilesPage } from "./Pages/SubjectFilesPage";
 import { ProfilePage } from "./Pages/ProfilePage";
 import { NotificationsPage } from "./Pages/NotificationPage";
 import { Logout } from "./components/Logout";
+import { ResetPasswordPage } from "./Pages/ResetPasswordPage";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -29,9 +30,12 @@ function App() {
     async function checkAuth() {
       const token = localStorage.getItem("token");
 
-      // No token — if on a protected page, send to login
+      const isPublic =
+        PUBLIC_ROUTES.includes(location.pathname) ||
+        location.pathname.startsWith("/reset-password");
+
       if (!token) {
-        if (!PUBLIC_ROUTES.includes(location.pathname)) {
+        if (!isPublic) {
           navigate("/login");
         }
         return;
@@ -40,11 +44,9 @@ function App() {
       try {
         await api.get("/api/auth/me");
 
-        // Token is valid — only redirect to dashboard if on a public route
-        if (PUBLIC_ROUTES.includes(location.pathname)) {
+        if (isPublic) {
           navigate("/dashboard");
         }
-        // Otherwise stay on whatever page the user is on
       // eslint-disable-next-line no-unused-vars
       } catch (err) {
         localStorage.removeItem("token");
@@ -64,70 +66,16 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot" element={<ForgotPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+        <Route path="/logout" element={<Logout />} />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/resources"
-          element={
-            <ProtectedRoute>
-              <ResourcePage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/resources/:subjectId"
-          element={
-            <ProtectedRoute>
-              <SubjectFilesPage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/assistant"
-          element={
-            <ProtectedRoute>
-              <AiPage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/upload"
-          element={
-            <ProtectedRoute>
-              <UploadPage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute>
-              <NotificationsPage />
-            </ProtectedRoute>
-          }
-        />
-
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/resources" element={<ProtectedRoute><ResourcePage /></ProtectedRoute>} />
+        <Route path="/resources/:subjectId" element={<ProtectedRoute><SubjectFilesPage /></ProtectedRoute>} />
+        <Route path="/assistant" element={<ProtectedRoute><AiPage /></ProtectedRoute>} />
+        <Route path="/upload" element={<ProtectedRoute><UploadPage /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </>

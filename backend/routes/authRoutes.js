@@ -1,8 +1,10 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import { protect } from "../middleware/authMiddleware.js";
 import { User } from "../models/user.js";
+import { sendWelcomeEmail, sendResetEmail } from "../utils/sendEmail.js";
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "All fields required" });
     }
 
-    const existingUser = await User.findOne( {
+    const existingUser = await User.findOne({
       $or: [{ email }, { rollNumber }],
     });
 
@@ -35,9 +37,12 @@ router.post("/register", async (req, res) => {
       expiresIn: "7d",
     });
 
-    res.status(201).json({ 
-      message: "User registered successfully" ,
-      token
+    // send welcome email (non-blocking)
+    sendWelcomeEmail(user.name, user.email).catch(console.error);
+
+    res.status(201).json({
+      message: "User registered successfully",
+      token,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -49,14 +54,10 @@ router.post("/login", async (req, res) => {
     const { rollNumber, password } = req.body;
 
     const user = await User.findOne({ rollNumber });
-    if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -72,6 +73,57 @@ router.get("/me", protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
     res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    // always return success to avoid email enumeration
+    if (!user) {
+      return res.json({ message: "If that email exists, a reset link was sent." });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
+
+    user.resetToken = resetToken;
+    user.resetTokenExpiry = resetTokenExpiry;
+    await user.save();
+
+    await sendResetEmail(user.email, resetToken);
+
+    res.json({ message: "If that email exists, a reset link was sent." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/reset-password/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      resetToken: token,
+      resetTokenExpiry: { $gt: new Date() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired reset link." });
+    }
+
+    user.password = await bcrypt.hash(password, 10);
+    user.resetToken = undefined;
+    user.resetTokenExpiry = undefined;
+    await user.save();
+
+    res.json({ message: "Password reset successful." });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
