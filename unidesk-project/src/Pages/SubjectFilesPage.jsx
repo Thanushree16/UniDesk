@@ -41,8 +41,9 @@ export function SubjectFilesPage() {
     fetchData();
   }, [subjectId]);
 
-  function openFile(url) {
+  function openFile(url, fileName) {
     if (!url) return;
+    localStorage.setItem("recentFile", JSON.stringify({ name: fileName, url }));
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
@@ -103,7 +104,7 @@ export function SubjectFilesPage() {
 
                 <div className="file-actions">
                   <button
-                    onClick={() => openFile(file.fileUrl)}
+                    onClick={() => openFile(file.fileUrl, file.fileName)}
                     className="open-btn"
                   >
                     Open

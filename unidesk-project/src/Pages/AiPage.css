@@ -342,21 +342,65 @@
 .send-icon:hover { transform: scale(1.05); opacity: 0.9; }
 
 /* ===== MOBILE ===== */
-
 @media (max-width: 768px) {
-  .ai-topbar-row { padding: 16px 16px 0; }
-  .ai-content { padding: 0 16px 16px; }
-  .ai-title { font-size: 1.6rem; }
-  .chat-bubble.user, .chat-bubble.ai { max-width: 100%; }
-  .ai-input input { height: 46px; }
-  .send-icon { width: 44px; height: 44px; }
-  .file-picker { width: 100%; }
+  .ai-main {
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+  }
+
+  .ai-topbar-row {
+    padding: 12px 12px 0;
+  }
+
+  .ai-content {
+    padding: 0 12px 12px;
+  }
+
+  .ai-title {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .chat-bubble.user,
+  .chat-bubble.ai {
+    max-width: 100%;
+  }
+
+  .ai-input input {
+    height: 44px;
+    font-size: 0.88rem;
+  }
+
+  .send-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .attach-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .file-picker {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
 }
 
 @media (max-width: 480px) {
-  .ai-topbar-row { padding: 12px 12px 0; }
-  .ai-content { padding: 0 12px 12px; }
-  .ai-main .search-box { width: 45%; }
+  .ai-topbar-row {
+    padding: 10px 10px 0;
+  }
+
+  .ai-content {
+    padding: 0 10px 10px;
+  }
+
+  .ai-main .search-box {
+    width: 45%;
+  }
 }
 
 /* ===== CUSTOM SELECT ===== */

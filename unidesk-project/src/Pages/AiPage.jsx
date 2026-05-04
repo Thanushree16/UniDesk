@@ -233,7 +233,7 @@ export function AiPage() {
                       />
                     </div>
                     <button className="picker-next" onClick={() => setPickerStep(2)}>
-                      Next →
+                      Next
                     </button>
                   </>
                 )}
@@ -241,7 +241,7 @@ export function AiPage() {
                 {pickerStep === 2 && (
                   <>
                     <div className="picker-label">
-                      <button className="picker-back" onClick={() => setPickerStep(1)}>← Back</button>
+                      <button className="picker-back" onClick={() => setPickerStep(1)}>Back</button>
                       <span>Select Subject</span>
                     </div>
                     {subjects.length === 0 ? (

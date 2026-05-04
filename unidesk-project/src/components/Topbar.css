@@ -54,6 +54,7 @@
   color: #ffffff;
   font-size: 20px;
   transition: background 0.2s ease;
+  border: none;
 }
 
 .notification-bell:hover,
