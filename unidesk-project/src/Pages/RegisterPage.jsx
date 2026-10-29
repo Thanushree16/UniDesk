@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TfiControlBackward } from "react-icons/tfi";
+import { BiShow, BiHide } from "react-icons/bi";
 import { useSubjects } from "../context/SubjectsContext";
 import api from "../services/api";
 import "./RegisterPage.css";
@@ -15,6 +16,8 @@ export function RegisterPage() {
   const [rollNumber, setRollNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     document.title = "Register | UniDesk";
@@ -36,8 +39,7 @@ export function RegisterPage() {
         password,
       });
 
-       await refreshSubjects();
-
+      await refreshSubjects();
 
       toast.success("Registered successfully");
       navigate("/login");
@@ -51,7 +53,8 @@ export function RegisterPage() {
       {/* Navbar */}
       <nav className="auth-navbar">
         <Link to="/" className="nav-back-btn">
-          <TfiControlBackward />Back to Home
+          <TfiControlBackward />
+          Back to Home
         </Link>
         <div className="nav-logo">
           <img
@@ -96,26 +99,42 @@ export function RegisterPage() {
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Create a password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Create a password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  className="eye-icon"
+                  onClick={() => setShowPassword((p) => !p)}
+                >
+                  {showPassword ? <BiHide /> : <BiShow />}
+                </span>
+              </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Confirm your password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <div className="input-wrapper">
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  id="confirmPassword"
+                  placeholder="Confirm your password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <span
+                  className="eye-icon"
+                  onClick={() => setShowConfirm((p) => !p)}
+                >
+                  {showConfirm ? <BiHide /> : <BiShow />}
+                </span>
+              </div>
             </div>
 
             <button type="submit" className="register-btn">

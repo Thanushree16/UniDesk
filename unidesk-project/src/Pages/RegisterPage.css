@@ -138,6 +138,48 @@ form {
   border-color: #667eea;
 }
 
+/* ===== Autofill Override ===== */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #0a1628 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ===== Input Wrapper ===== */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+/* ===== Eye Icon ===== */
+.eye-icon {
+  position: absolute;
+  right: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* ===== Register Button ===== */
 .register-btn {
   width: 100%;

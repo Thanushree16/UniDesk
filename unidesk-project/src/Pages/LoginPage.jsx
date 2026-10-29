@@ -2,6 +2,7 @@ import "./LoginPage.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TfiControlBackward } from "react-icons/tfi";
+import { BiShow, BiHide } from "react-icons/bi";
 import { useSubjects } from "../context/SubjectsContext";
 import api from "../services/api";
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ export function LoginPage() {
 
   const [rollNumber, setRollNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     document.title = "Login | UniDesk";
@@ -29,7 +31,7 @@ export function LoginPage() {
 
       localStorage.setItem("token", data.token);
 
-       await refreshSubjects();
+      await refreshSubjects();
 
       toast.success("Login Successful !");
       navigate("/resources");
@@ -43,7 +45,8 @@ export function LoginPage() {
       {/* Navbar */}
       <nav className="auth-navbar">
         <Link to="/" className="nav-back-btn">
-          <TfiControlBackward />Back to Home
+          <TfiControlBackward />
+          Back to Home
         </Link>
         <div className="nav-logo">
           <img
@@ -76,14 +79,22 @@ export function LoginPage() {
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Enter your password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  className="eye-icon"
+                  onClick={() => setShowPassword((p) => !p)}
+                >
+                  {showPassword ? <BiHide /> : <BiShow />}
+                </span>
+              </div>
             </div>
 
             <div className="options-row">
